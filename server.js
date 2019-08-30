@@ -20,6 +20,9 @@ var articleRouter = require('./Routes/ArticleRoutes');
 var userRouter = require('./Routes/UserRoutes')
 var adminRouter = require('./Routes/AdminRoutes')
 
+//OSX bcrypt is different from linux
+var bcrypt   = require('bcrypt-nodejs');
+
 //user session pakckages
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
