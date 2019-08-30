@@ -3,16 +3,17 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const path = require("path")
 //import { PORT, NODE_ENV, SESS_NAME, SESS_SECRET, SESS_LIFETIME } from './config'  //require('./config');
 //const serverConfig = require('./config')
 const dotenv = require('dotenv');
 require('dotenv').config();
 //var PORT = serverConfig.PORT
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4000;
 const SESS_LIFETIME = process.env.SESS_LIFETIME
 const NODE_ENV=process.env.NODE_ENV
 const SESS_NAME=process.env.SESS_NAME
-const SESS_SECRET=process.env.SESS_SECRET
+const SESS_SECRET=process.env.SESS_SECRET || "secretphraseLocal"
 console.log(NODE_ENV === 'production')
 
 var articleRouter = require('./Routes/ArticleRoutes');
@@ -23,6 +24,8 @@ var adminRouter = require('./Routes/AdminRoutes')
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
+//Connent backend to frontend
+app.use(express.static(path.join(__dirname, "client", "build")))
 
 //app.use(cors());
 app.use(bodyParser.json());
@@ -42,7 +45,7 @@ const corsConfig = {
 app.use(cors(corsConfig));
 //app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 
-mongoose.connect('mongodb://127.0.0.1:27017/articles', { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI ||'mongodb://127.0.0.1:27017/articles', { useNewUrlParser: true });
 
 var db = mongoose.connection;
 db.once('open', function() {
@@ -72,6 +75,9 @@ app.use('/user', userRouter);
 app.use('/admin', adminRouter);
 
 
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
