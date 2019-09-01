@@ -40,7 +40,7 @@ function Article(props) {
 
   const articleTitle = props.match.params.title
   const slug = PrettyUrl(articleTitle)
-  const url = `http://localhost:4000/articles/${slug}`
+  const url = `/articles/${slug}` //http://localhost:4000
   //const id = props.id
   const [fetch, setFetch] = useState({
     isLoading: false,
@@ -138,7 +138,7 @@ function Article(props) {
       commentSet: true,
       error: null
     })
-    const commenturl = `http://localhost:4000/articles/${slug}/comments`
+    const commenturl = `/articles/${slug}/comments`
     axios({
       method: 'post',
       url: commenturl,
@@ -181,19 +181,21 @@ function Article(props) {
       </div>
       {fetch.isError ?
         // fetch.error.statuscode == 401 ?
-        fetch.error.code == 401 ?
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginLeft: 'auto', marginRight: 'auto', minHeight: '400px'}}>
-          <Heading marginBottom={10} size={700}>"Oops.. Looks like you're not logged in!"</Heading>
-          <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
-            <Link to={'/login'}>
-              <Heading size={500} marginRight={5}>Login</Heading>
-            </Link>
-            <Heading size={500}>
-            to enjoy the article {articleTitle}
-            </Heading>
-          </div>
-        </div>
-        :
+        // fetch.error.code == 401 ?
+        // <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginLeft: 'auto', marginRight: 'auto', minHeight: '400px'}}>
+        //   <Heading marginBottom={10} size={700}>"Oops.. Looks like you're not logged in!"</Heading>
+        //   <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
+        //     <Link to={'/login'}>
+        //       <Heading size={500} marginRight={5}>Login</Heading>
+        //     </Link>
+        //     <Heading size={500}>
+        //     to enjoy the article {articleTitle}
+        //     </Heading>
+        //   </div>
+        // </div>
+        // :
+        // <div>Error: {fetch.error.error.message}</div>
+        // :
         <div>Error: {fetch.error.error.message}</div>
         :
         <div>

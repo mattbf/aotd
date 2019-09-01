@@ -46,7 +46,7 @@ function App() {
   //Call auth api
 
   useEffect(() => {
-    axios.get('http://localhost:4000/user/auth')
+    axios.get('/user/auth')
       .then(response => {
         globalActions.setUser(response.data)
         globalActions.LogInOut(true)

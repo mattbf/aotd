@@ -111,7 +111,7 @@ function Navbar(props) {
   console.log(isMobile)
   const browserHistory = props.history
   function LogoutUser() {
-    axios.get('http://localhost:4000/user/logout')
+    axios.get('/user/logout')
         .then(response => {
           console.log("user logged out")
           globalActions.LogInOut(false)
@@ -132,7 +132,7 @@ function Navbar(props) {
             <div>
               <Link to='/' style={{marginRight: '12px', margin: '0px', textDecoration: 'none'}}>
                 <Heading size={700} style={lightText}>AOTD</Heading>
-                <Heading size={200} style={lightText}>Article Of The Day</Heading>
+                <Heading size={200} style={lightText}>Article Of The Day test</Heading>
               </Link>
             </div>
 

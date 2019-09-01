@@ -27,7 +27,7 @@ function Home() {
   })
   useEffect(() => {
     if (!user.username) {
-      axios.get('http://localhost:4000/user/auth', { useCredentails: true })
+      axios.get('/user/auth', { useCredentails: true })
         .then(response => {
           //setUser(response.data);
           globalActions.setUser(response.data)//check this
