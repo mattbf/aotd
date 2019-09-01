@@ -63,7 +63,10 @@ function Login(props) {
       withCredentials: true
     })
         .then(response => {
-            globalActions.setUser(response.data)//check this
+            globalActions.setUser(response.data)
+            console.log("repsonse data ")
+            console.log(response)
+            console.log(response.data)
             setFetch({
               isLoading: false,
               isError: false,

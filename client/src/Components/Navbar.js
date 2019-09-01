@@ -106,9 +106,9 @@ function Navbar(props) {
 
   const { match, location, history } = props
   const path = match.path
-  const isArticle = path == '/article/:title' ? true : false
-  console.log(windowSize.width)
-  console.log(isMobile)
+  const isArticle = path == 'http://localhost:4000/article/:title' ? true : false
+  // console.log(windowSize.width)
+  // console.log(isMobile)
   const browserHistory = props.history
   function LogoutUser() {
     axios.get('/user/logout')

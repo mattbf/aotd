@@ -28,6 +28,9 @@ router.post('/', function (req, res, next) {
       password: req.body.password,
     }
 
+    console.log(userData)
+    //remove
+
     User.create(userData, function (error, user) {
       if (error) {
         if (error.code === 11000) {
@@ -68,7 +71,13 @@ router.post('/', function (req, res, next) {
       } else {
         req.session.userId = user._id;
         console.log(user.username + " logged in Session: " + req.session.userId)
-        return res.status(200).send(user.username + ' logged in successfully'); // pass logemail to log back in
+        //return res.status(200).send(user.username + ' logged in successfully');
+        return res.status(200).json({
+          'username': user.username,
+          'email': user.email,
+          'role': user.role,
+          'createdAt': user.createdAt,
+        }); // pass logemail to log back in
       }
     });
   } else {
@@ -87,6 +96,8 @@ router.get('/auth', function (req, res, next) {
         return next(error);
       } else {
         if (user === null) {
+          console.log('User==null ' + req.session.userId)
+          console.log(user)
           var err = new Error('Not authorized! Go back!');
           err.status = 400;
           return next(err);

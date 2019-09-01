@@ -40,7 +40,7 @@ function Article(props) {
 
   const articleTitle = props.match.params.title
   const slug = PrettyUrl(articleTitle)
-  const url = `/articles/${slug}` //http://localhost:4000
+  const url = `http://localhost:4000/articles/${slug}` //http://localhost:4000
   //const id = props.id
   const [fetch, setFetch] = useState({
     isLoading: false,
