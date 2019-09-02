@@ -23,7 +23,7 @@ router.route('/').get(function(req, res) {
 //Get one Article
 router.route('/:slug').get(function(req, res) {
   console.log("rquesting " + req.params.slug)
-  console.log(req)
+  console.log(req.session)
 
   User.findById(req.session.userId)
     .exec(function (error, user) {

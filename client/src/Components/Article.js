@@ -95,7 +95,7 @@ function Article(props) {
     })
 
     console.log(url)
-    axios.get(url)
+    axios.get(url, { useCredentails: true })
         .then(response => {
             // console.log("fetched article")
             console.log(response.data.body)

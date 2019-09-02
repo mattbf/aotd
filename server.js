@@ -39,10 +39,11 @@ app.use(function(req, res, next) {
   next();
 });
 const corsConfig = {
-    origin:['http://localhost:3000'],
+    origin:['http://localhost:3000', 'https://aotd.herokuapp.com', 'http://localhost:4000' ],
     methods:['GET','POST'],
     credentials: true,
 };
+
 app.use(cors(corsConfig));
 //app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 
@@ -62,12 +63,12 @@ app.use(session({
       store: new MongoStore({
         mongooseConnection: db,
         collection: 'session',
-        ttl: parseInt(SESS_LIFETIME) / 1000
+        ttl: parseInt(SESS_LIFETIME) / 1000 || (60 * 60 * 48) / 1000
       }),
       cookie: {
         sameSite: true,
         secure: false, //NODE_ENV === 'production',
-        maxAge: parseInt(SESS_LIFETIME),
+        maxAge: parseInt(SESS_LIFETIME) || 60 * 60 * 48 //two days locally,
       }
     }));
 
