@@ -47,7 +47,7 @@ function App() {
 
   useEffect(() => {
 
-    axios.get('http://localhost:4000/user/auth', { useCredentails: true })
+    axios.get('http://localhost:4000/user/auth', { withCredentials: true })
       .then(response => {
         globalActions.setUser(response.data)
         globalActions.LogInOut(true)

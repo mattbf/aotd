@@ -95,7 +95,7 @@ function Article(props) {
     })
 
     console.log(url)
-    axios.get(url, { useCredentails: true })
+    axios.get(url, { withCredentials: true })
         .then(response => {
             // console.log("fetched article")
             console.log(response.data.body)

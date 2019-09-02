@@ -27,7 +27,7 @@ function Home() {
   })
   useEffect(() => {
     if (!user.username) {
-      axios.get('/user/auth', { useCredentails: true })
+      axios.get('/user/auth', { withCredentials: true })
         .then(response => {
           //setUser(response.data);
           globalActions.setUser(response.data)//check this

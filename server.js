@@ -68,6 +68,7 @@ app.use(session({
       cookie: {
         sameSite: true,
         path: '/',
+        domain: process.env.APP_DOMAIN || 'localhost:4000',
         secure: false, //NODE_ENV === 'production',
         maxAge: parseInt(SESS_LIFETIME) || 60 * 60 * 48 //two days locally,
       }
