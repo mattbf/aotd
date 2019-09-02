@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 //express.session({cookie: { domain: '.app.localhost', maxAge: 24 * 60 * 60 * 1000 }})
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000", "http://localhost:4000");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Credentials", true);
   next();
@@ -56,8 +56,8 @@ db.once('open', function() {
 
 
 app.use(session({
-      name: SESS_NAME,
-      secret: SESS_SECRET,
+      name: SESS_NAME || "localsession",
+      secret: SESS_SECRET || "localsessionsecret",
       saveUninitialized: false,
       resave: false,
       store: new MongoStore({
