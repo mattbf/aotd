@@ -40,7 +40,8 @@ function Article(props) {
 
   const articleTitle = props.match.params.title
   const slug = PrettyUrl(articleTitle)
-  const url = `http://localhost:4000/article/${slug}` //http://localhost:4000
+  const url = `http://localhost:4000/articles/${slug}` //http://localhost:4000
+  const copyUrl = `http://localhost:4000/article/${slug}`
   //const id = props.id
   const [fetch, setFetch] = useState({
     isLoading: false,
@@ -174,7 +175,7 @@ function Article(props) {
     <div>
       <Navbar/>
       <div style={{width: '100%', display: 'flex', alignItems: 'flex-end' }}>
-        <CopyToClipboard text={url}
+        <CopyToClipboard text={copyUrl}
           onCopy={() => toaster.notify('Article URL copied to clipboard')}>
           <Button style={{marginTop: '15px', marginLeft: 'auto'}} marginRight={12} iconAfter="link">Share</Button>
         </CopyToClipboard>
