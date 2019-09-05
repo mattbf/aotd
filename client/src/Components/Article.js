@@ -40,7 +40,7 @@ function Article(props) {
 
   const articleTitle = props.match.params.title
   const slug = PrettyUrl(articleTitle)
-  const url = `http://localhost:4000/articles/${slug}` //http://localhost:4000
+  const url = `http://localhost:4000/article/${slug}` //http://localhost:4000
   //const id = props.id
   const [fetch, setFetch] = useState({
     isLoading: false,
@@ -138,7 +138,7 @@ function Article(props) {
       commentSet: true,
       error: null
     })
-    const commenturl = `/articles/${slug}/comments`
+    const commenturl = `/article/${slug}/comments`
     axios({
       method: 'post',
       url: commenturl,
