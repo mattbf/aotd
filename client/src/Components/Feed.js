@@ -52,7 +52,7 @@ function Feed() {
         :
         fetch.isError ?
           <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginLeft: 'auto', marginRight: 'auto', minHeight: '400px'}}>
-            <Heading marginBottom={10} size={700}>Oops.. Looks like Something went wrong!</Heading>
+            <Heading marginBottom={10} size={700}>Looks like Something went wrong!</Heading>
             <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
               <Heading size={500}>
               {fetch.error.message}.. Try refreshing the page
