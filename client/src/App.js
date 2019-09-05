@@ -44,10 +44,11 @@ function App() {
     error: null
   })
   //Call auth api
+  const url = process.env.APP_DOMAIN || 'http://localhost:4000'
 
   useEffect(() => {
 
-    axios.get('http://localhost:4000/user/auth', { withCredentials: true })
+    axios.get(`${url}/user/auth`, { withCredentials: true })
       .then(response => {
         globalActions.setUser(response.data)
         globalActions.LogInOut(true)

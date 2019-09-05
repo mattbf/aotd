@@ -9,6 +9,7 @@ import {
 
 
 function Feed() {
+  const url = process.env.APP_DOMAIN || 'http://localhost:4000'
   const [feed, setFeed] = useState([])
   const articleCount = feed.length
   const [fetch, setFetch] = useState({
@@ -23,7 +24,7 @@ function Feed() {
       isError: false,
       error: null
     })
-    axios.get('http://localhost:4000/articles/')
+    axios.get(`${url}/articles`)
         .then(response => {
             setFeed(response.data);
             setFetch({
