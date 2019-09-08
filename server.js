@@ -81,20 +81,20 @@ app.use('/user', userRouter);
 app.use('/admin', adminRouter);
 
 //Connent backend to frontend
-// app.use(express.static(path.join(__dirname, "client", "build")))
+app.use(express.static(path.join(__dirname, "client", "build")))
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
+
+// if (NODE_ENV === 'production') {
+//   // Set static folder
+//   app.use(express.static(path.join(__dirname, "client", "build")))
 //
-// app.get("*", (req, res) => {
+//   app.get('*', (req, res) => {
 //     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-// });
-
-if (NODE_ENV === 'production') {
-  // Set static folder
-  app.use(express.static(path.join(__dirname, "client", "build")))
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  });
-}
+//   });
+// }
 
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
