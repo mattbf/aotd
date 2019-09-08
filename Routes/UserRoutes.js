@@ -71,6 +71,8 @@ router.post('/', function (req, res, next) {
       } else {
         req.session.userId = user._id;
         console.log(user.username + " logged in Session: " + req.session.userId)
+        console.log("user session created: ")
+        console.log(req.session)
         //return res.status(200).send(user.username + ' logged in successfully');
         return res.status(200).json({
           'username': user.username,
@@ -121,6 +123,7 @@ router.get('/logout', function (req, res, next) {
       if (err) {
         return next(err);
       } else {
+        //console.log(req.session + ' logged out')
         res.clearCookie(SESS_NAME);
         return res.status(200).send(req.session + ' logged out');
       }

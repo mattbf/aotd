@@ -13,6 +13,7 @@ import Todo from './Components/Todo'
 import Admin from './Components/Admin/Admin'
 
 import axios from 'axios'
+axios.defaults.withCredentials = true;
 
 import useGlobal from './GlobalState/Store/Store';
 

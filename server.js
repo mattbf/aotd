@@ -9,6 +9,7 @@ const path = require("path")
 const dotenv = require('dotenv');
 require('dotenv').config();
 //var PORT = serverConfig.PORT
+const APP_DOMAIN = process.env.APP_DOMAIN
 const PORT = process.env.PORT || 4000;
 const SESS_LIFETIME = process.env.SESS_LIFETIME
 const NODE_ENV=process.env.NODE_ENV
@@ -25,12 +26,13 @@ var adminRouter = require('./Routes/AdminRoutes')
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
-//Connent backend to frontend
-app.use(express.static(path.join(__dirname, "client", "build")))
 
 //app.use(cors());
 app.use(bodyParser.json());
 //express.session({cookie: { domain: '.app.localhost', maxAge: 24 * 60 * 60 * 1000 }})
+
+//PLease make cookies work
+app.set('trust proxy', 1)
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:4000");
@@ -68,7 +70,7 @@ app.use(session({
       cookie: {
         sameSite: true,
         path: '/',
-        domain: process.env.APP_DOMAIN || 'localhost:4000',
+        domain: APP_DOMAIN || 'localhost:4000',
         secure: false, //NODE_ENV === 'production',
         maxAge: parseInt(SESS_LIFETIME) || 60 * 60 * 48 //two days locally,
       }
@@ -78,10 +80,21 @@ app.use('/articles', articleRouter);
 app.use('/user', userRouter);
 app.use('/admin', adminRouter);
 
+//Connent backend to frontend
+// app.use(express.static(path.join(__dirname, "client", "build")))
+//
+// app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+// });
 
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
+if (NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static(path.join(__dirname, "client", "build")))
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
