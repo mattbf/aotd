@@ -26,6 +26,8 @@ var adminRouter = require('./Routes/AdminRoutes')
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
+//Connent backend to frontend
+app.use(express.static(path.join(__dirname, "client", "build")))
 
 //app.use(cors());
 app.use(bodyParser.json());
@@ -80,8 +82,7 @@ app.use('/articles', articleRouter);
 app.use('/user', userRouter);
 app.use('/admin', adminRouter);
 
-//Connent backend to frontend
-app.use(express.static(path.join(__dirname, "client", "build")))
+
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
