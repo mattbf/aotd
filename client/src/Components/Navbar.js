@@ -132,7 +132,7 @@ function Navbar(props) {
             <div>
               <Link to='/' style={{marginRight: '12px', margin: '0px', textDecoration: 'none'}}>
                 <Heading size={700} style={lightText}>AOTD</Heading>
-                <Heading size={200} style={lightText}>Article Of The Day new</Heading>
+                <Heading size={200} style={lightText}>Article Of The Day 2.0</Heading>
               </Link>
             </div>
 
