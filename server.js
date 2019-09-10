@@ -26,30 +26,25 @@ var adminRouter = require('./Routes/AdminRoutes')
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
-//Connent backend to frontend
-app.use(express.static(path.join(__dirname, "client", "build")))
+
 
 //app.use(cors());
 app.use(bodyParser.json());
 //express.session({cookie: { domain: '.app.localhost', maxAge: 24 * 60 * 60 * 1000 }})
 
-//PLease make cookies work
-app.set('trust proxy', 1)
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:4000");
+  res.header("Access-Control-Allow-Origin", 'http://localhost:4000');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Credentials", true);
   next();
 });
 const corsConfig = {
-    origin:['http://localhost:3000', 'https://aotd.herokuapp.com', 'http://localhost:4000' ],
+    origin: ['http://localhost:3000', 'https://aotd.herokuapp.com', 'http://localhost:4000' ],
     methods:['GET','POST'],
     credentials: true,
 };
-
 app.use(cors(corsConfig));
-//app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 
 mongoose.connect(process.env.MONGODB_URI ||'mongodb://127.0.0.1:27017/articles', { useNewUrlParser: true });
 
@@ -72,7 +67,7 @@ app.use(session({
       cookie: {
         sameSite: true,
         path: '/',
-        domain: APP_DOMAIN || 'localhost:4000',
+        domain: APP_DOMAIN || '127.0.0.1',
         secure: false, //NODE_ENV === 'production',
         maxAge: parseInt(SESS_LIFETIME) || 60 * 60 * 48 //two days locally,
       }
@@ -83,6 +78,8 @@ app.use('/user', userRouter);
 app.use('/admin', adminRouter);
 
 
+//Connent backend to frontend
+app.use(express.static(path.join(__dirname, "client", "build")))
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));

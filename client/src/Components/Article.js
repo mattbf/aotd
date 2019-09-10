@@ -41,8 +41,8 @@ function Article(props) {
   const articleTitle = props.match.params.title
   const slug = PrettyUrl(articleTitle)
   const url = `http://localhost:4000/articles/${slug}` //http://localhost:4000
-  const domain = process.env.APP_DOMAIN
-  const copyUrl = `${domain}/${slug}` || `http://localhost:4000/article/${slug}`
+  //const domain = process.env.APP_DOMAIN
+  const copyUrl = `${requrl}/${slug}` || `http://localhost:4000/article/${slug}`
   const requrl = process.env.APP_DOMAIN || 'http://localhost:4000'
   //const id = props.id
   const [fetch, setFetch] = useState({
@@ -98,7 +98,7 @@ function Article(props) {
     })
 
     console.log(url)
-    axios.get(`${requrl}/articles/${slug}`, { withCredentials: true })
+    axios.get(`${requrl}/articles/${slug}`, {withCredentials: true, useCredentials: true })
         .then(response => {
             // console.log("fetched article")
             console.log(response.data.body)

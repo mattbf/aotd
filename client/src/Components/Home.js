@@ -13,7 +13,7 @@ import {
 //import { useSimpleState } from 'use-simple-state';
 //import { logIn } from '../Store';
 
-//axios.defaults.crossdomain = true,
+//axios.defaults.crossdomain = true;
 
 function Home() {
   const [globalState, globalActions] = useGlobal();
