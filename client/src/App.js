@@ -11,11 +11,11 @@ import CreateArticle from './Components/CreateArticle'
 import Profile from './Components/Profile'
 import Todo from './Components/Todo'
 import Admin from './Components/Admin/Admin'
-
+import useGlobal from './GlobalState/Store/Store';
 import axios from 'axios'
 axios.defaults.withCredentials = true;
 
-import useGlobal from './GlobalState/Store/Store';
+
 
 
 const centerBlock = {
