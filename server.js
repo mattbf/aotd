@@ -11,10 +11,11 @@ require('dotenv').config();
 //var PORT = serverConfig.PORT
 const APP_DOMAIN = process.env.APP_DOMAIN
 const PORT = process.env.PORT || 4000;
-const SESS_LIFETIME = process.env.SESS_LIFETIME
+const SESS_LIFETIME = process.env.SESS_LIFETIME || 60 * 60 * 24 * 14 //14 days in seconds
 const NODE_ENV=process.env.NODE_ENV
-const SESS_NAME=process.env.SESS_NAME
+const SESS_NAME=process.env.SESS_NAME || "localsession"
 const SESS_SECRET=process.env.SESS_SECRET || "secretphraseLocal"
+
 console.log(NODE_ENV === 'production')
 
 var articleRouter = require('./Routes/ArticleRoutes');
@@ -27,6 +28,7 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
 
+app.disable('x-powered-by');
 
 //app.use(cors());
 app.use(bodyParser.json());
@@ -55,21 +57,21 @@ db.once('open', function() {
 
 
 app.use(session({
-      name: SESS_NAME || "localsession",
-      secret: SESS_SECRET || "localsessionsecret",
+      name: SESS_NAME,
+      secret: SESS_SECRET,
       saveUninitialized: false,
       resave: false,
       store: new MongoStore({
         mongooseConnection: db,
         collection: 'session',
-        ttl: parseInt(SESS_LIFETIME) / 1000 || (60 * 60 * 48) / 1000
+        ttl: parseInt(SESS_LIFETIME) / 1000
       }),
       cookie: {
         sameSite: true,
         path: '/',
         domain: APP_DOMAIN || '127.0.0.1',
         secure: false, //NODE_ENV === 'production',
-        maxAge: parseInt(SESS_LIFETIME) || 60 * 60 * 48 //two days locally,
+        maxAge: parseInt(SESS_LIFETIME) / 1000
       }
     }));
 
