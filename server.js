@@ -11,9 +11,9 @@ require('dotenv').config();
 //var PORT = serverConfig.PORT
 const APP_DOMAIN = process.env.APP_DOMAIN
 const PORT = process.env.PORT || 4000;
-const SESS_LIFETIME = process.env.SESS_LIFETIME || 60 * 60 * 24 * 14 //14 days in seconds
+const SESS_LIFETIME = process.env.SESS_LIFETIME || 1000* 60 * 60 * 24 * 14 //14 days in milliseconds
 const NODE_ENV=process.env.NODE_ENV
-const SESS_NAME=process.env.SESS_NAME || "localsession"
+const SESS_NAME=process.env.SESS_NAME //|| "localsession"
 const SESS_SECRET=process.env.SESS_SECRET || "secretphraseLocal"
 
 console.log(NODE_ENV === 'production')
@@ -63,13 +63,13 @@ var sess = {
       store: new MongoStore({
         mongooseConnection: db,
         collection: 'session',
-        ttl: parseInt(SESS_LIFETIME) // 1000
+        ttl: parseInt(SESS_LIFETIME) / 1000 //mongoose takes it in seconds
       }),
       cookie: {
         sameSite: true,
         httpOnly: false, //NODE_ENV === 'production' ? true : false, //effects sending cookie
         path: '/',
-        domain: APP_DOMAIN, //|| '127.0.0.1',
+        //domain: APP_DOMAIN, //|| '127.0.0.1',
         secure: false, //NODE_ENV === 'production', //Effects on reload
         maxAge: parseInt(SESS_LIFETIME) // 1000
       }
@@ -77,7 +77,7 @@ var sess = {
 
 if (NODE_ENV === 'production') {
   app.set('trust proxy', 1) // trust first proxy
-  sess.cookie.secure = true // serve secure cookies
+  //sess.cookie.secure = true // serve secure cookies
 }
 app.use(session(sess))
 

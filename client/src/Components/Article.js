@@ -86,9 +86,16 @@ function Article(props) {
     })
   }
 
+
   const rawCommentContentState = convertToRaw(
     commentsEditorState.getCurrentContent()
   );
+  // //Blank Comment editor state
+  // const emptyContent = {"entityMap":{},"blocks":[{"key":"637gr","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
+  // //when the comment box is clicked clear the state
+  // if (commentFetch.commentSet) {
+  //   setCommentsEditorState(emptyContent)
+  // }
 
   useEffect(() => {
     setFetch({
