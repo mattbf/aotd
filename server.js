@@ -29,7 +29,6 @@ var MongoStore = require('connect-mongo')(session);
 
 
 app.disable('x-powered-by');
-
 //app.use(cors());
 app.use(bodyParser.json());
 //express.session({cookie: { domain: '.app.localhost', maxAge: 24 * 60 * 60 * 1000 }})
@@ -56,7 +55,7 @@ db.once('open', function() {
 })
 
 
-app.use(session({
+var sess = {
       name: SESS_NAME,
       secret: SESS_SECRET,
       saveUninitialized: false,
@@ -64,16 +63,23 @@ app.use(session({
       store: new MongoStore({
         mongooseConnection: db,
         collection: 'session',
-        ttl: parseInt(SESS_LIFETIME) / 1000
+        ttl: parseInt(SESS_LIFETIME) // 1000
       }),
       cookie: {
         sameSite: true,
+        httpOnly: NODE_ENV === 'production' ? true : false,
         path: '/',
-        domain: APP_DOMAIN || '127.0.0.1',
+        domain: APP_DOMAIN, //|| '127.0.0.1',
         secure: false, //NODE_ENV === 'production',
-        maxAge: parseInt(SESS_LIFETIME) / 1000
+        maxAge: parseInt(SESS_LIFETIME) // 1000
       }
-    }));
+    }
+
+if (NODE_ENV === 'production') {
+  app.set('trust proxy', 1) // trust first proxy
+  sess.cookie.secure = true // serve secure cookies
+}
+app.use(session(sess))
 
 app.use('/articles', articleRouter);
 app.use('/user', userRouter);
