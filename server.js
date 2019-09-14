@@ -67,10 +67,10 @@ var sess = {
       }),
       cookie: {
         sameSite: true,
-        httpOnly: false, //NODE_ENV === 'production' ? true : false,
+        httpOnly: false, //NODE_ENV === 'production' ? true : false, //effects sending cookie
         path: '/',
         domain: APP_DOMAIN, //|| '127.0.0.1',
-        secure: false, //NODE_ENV === 'production',
+        secure: false, //NODE_ENV === 'production', //Effects on reload
         maxAge: parseInt(SESS_LIFETIME) // 1000
       }
     }
