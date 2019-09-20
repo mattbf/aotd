@@ -66,6 +66,7 @@ function Feed() {
             )}
           </div>
       }
+      {articleCount < 1 ? <div> No Articles yet... </div> : null}
 
     </div>
   )

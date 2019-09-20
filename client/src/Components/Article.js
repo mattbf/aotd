@@ -104,7 +104,7 @@ function Article(props) {
       error: null
     })
 
-    console.log(url)
+    //console.log(url)
     axios.get(`/articles/${slug}`, {withCredentials: true, useCredentials: true }) //removed ${requrl} from start of url
         .then(response => {
             // console.log("fetched article")
