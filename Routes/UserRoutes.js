@@ -101,7 +101,7 @@ router.get('/auth', function (req, res, next) {
           // console.log('User==null ' + req.session.userId)
           // console.log(user)
           var err = new Error('Not authorized! Go back!');
-          err.status = 400;
+          err.status = 405; //Chnaged to 405 for debugging
           return next(err);
         } else {
           return res.json({
