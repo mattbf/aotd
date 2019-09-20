@@ -70,7 +70,7 @@ var sess = {
         httpOnly: true, //NODE_ENV === 'production' ? true : false, //effects sending cookie
         path: '/',
         domain: 'https://aotd.herokuapp.com', //|| '127.0.0.1', // change APP_DOMAIN
-        secure: false, //NODE_ENV === 'production', //Effects on reload
+        secure: true, //NODE_ENV === 'production', //Effects on reload
         maxAge: parseInt(SESS_LIFETIME) // 1000
       }
     }
