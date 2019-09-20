@@ -11,7 +11,7 @@ require('dotenv').config();
 //var PORT = serverConfig.PORT
 const APP_DOMAIN = process.env.APP_DOMAIN
 const PORT = process.env.PORT || 4000;
-const SESS_LIFETIME = process.env.SESS_LIFETIME || 1000* 60 * 60 * 24 * 14 //14 days in milliseconds
+const SESS_LIFETIME = process.env.SESS_LIFETIME || 1000 * 60 * 60 * 24 * 14 //14 days in milliseconds
 const NODE_ENV=process.env.NODE_ENV
 const SESS_NAME=process.env.SESS_NAME //|| "localsession"
 const SESS_SECRET=process.env.SESS_SECRET || "secretphraseLocal"
@@ -63,7 +63,7 @@ var sess = {
       store: new MongoStore({
         mongooseConnection: db,
         collection: 'session',
-        ttl: parseInt(SESS_LIFETIME) / 1000 //mongoose takes it in seconds
+        ttl: parseInt(SESS_LIFETIME) /// 1000 //mongoose takes it in seconds
       }),
       cookie: {
         sameSite: true,
