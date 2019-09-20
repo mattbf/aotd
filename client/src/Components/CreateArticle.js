@@ -89,7 +89,7 @@ function CreateArticle() {
     })
     axios({
       method: 'post',
-      url: 'http://localhost:4000/articles/add',
+      url: '/articles/add',
       data:{
       	title: title,
       	author: user.username,

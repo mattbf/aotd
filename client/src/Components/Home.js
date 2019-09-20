@@ -15,6 +15,8 @@ import {
 
 //axios.defaults.crossdomain = true;
 
+//const url = process.env.APP_DOMAIN || 'http://localhost:4000'
+
 function Home() {
   const [globalState, globalActions] = useGlobal();
   const user = globalState.user

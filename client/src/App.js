@@ -14,9 +14,11 @@ import Admin from './Components/Admin/Admin'
 import useGlobal from './GlobalState/Store/Store';
 import axios from 'axios'
 axios.defaults.withCredentials = true;
+const APP_DOMAIN = process.env.APP_DOMAIN || 'http://localhost:4000'
 
+// https://aotd.herokuapp.com
 
-
+console.log("Req domain: " + APP_DOMAIN)
 
 const centerBlock = {
   marginLeft: 'auto',

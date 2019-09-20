@@ -24,7 +24,7 @@ function Feed() {
       isError: false,
       error: null
     })
-    axios.get(`${url}/articles`)
+    axios.get(`/articles`) // removed  ${url}
         .then(response => {
             setFeed(response.data);
             setFetch({

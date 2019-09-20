@@ -113,7 +113,7 @@ function Profile(props) {
       isError: false,
       error: null
     })
-    const url = `http://localhost:4000/user/${user.username}/update`
+    const url = `/user/${user.username}/update`
     axios({
       method: 'post',
       url: url,

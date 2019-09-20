@@ -105,7 +105,7 @@ function Article(props) {
     })
 
     console.log(url)
-    axios.get(`${requrl}/articles/${slug}`, {withCredentials: true, useCredentials: true })
+    axios.get(`/articles/${slug}`, {withCredentials: true, useCredentials: true }) //removed ${requrl} from start of url
         .then(response => {
             // console.log("fetched article")
             console.log(response.data.body)
@@ -148,7 +148,7 @@ function Article(props) {
       commentSet: true,
       error: null
     })
-    const commenturl = `/article/${slug}/comments`
+    const commenturl = `/articles/${slug}/comments`
     axios({
       method: 'post',
       url: commenturl,

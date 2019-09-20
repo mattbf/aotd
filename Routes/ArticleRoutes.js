@@ -131,6 +131,7 @@ router.route('/add').post(function(req, res) {
 //Add comments to an article
 router.route('/:slug/comments').post(function(req, res) {
     let slug = req.params.slug;
+    //console.log("comments atempt")
     console.log(slug)
     if (req.body.body) {
       Article.findOne({ slug: slug }, function (err, article) {

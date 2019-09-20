@@ -38,7 +38,7 @@ function Signup(props) {
     isAuth: false
   })
   function Signup() {
-    axios.post('http://localhost:4000/user/', {
+    axios.post('/user/', {
       username: login.username,
       email: login.email,
       password: login.password,
