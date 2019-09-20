@@ -199,7 +199,10 @@ function Article(props) {
               <Heading size={500} marginRight={5}>Login</Heading>
             </Link>
             <Heading size={500}>
-            to enjoy the article {articleTitle}
+            to enjoy the article
+            </Heading>
+            <Heading size={500} style={{color: '#2D80D4', marginLeft: '5px'}}>
+              {articleTitle}
             </Heading>
           </div>
         </div>

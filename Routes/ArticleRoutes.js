@@ -31,7 +31,7 @@ router.route('/:slug').get(function(req, res) {
         return res.status(400).send("Not logged in");
       } else {
         if (user === null) {
-          return res.status(401).send("Not authorized!");
+          return res.status(401).send("Not authorized. UserSession: " + req.session);
         } else {
           let slug = req.params.slug;
           Article.findOne({ slug: slug }, function (err, article) {

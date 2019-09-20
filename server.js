@@ -38,11 +38,12 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", APP_DOMAIN);
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Methods", ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"])
   next();
 });
 const corsConfig = {
     origin: ['http://localhost:3000', 'https://aotd.herokuapp.com', 'http://localhost:4000' ],
-    methods:['GET','POST'],
+    methods:['GET','POST','OPTIONS', 'HEAD'],
     credentials: true,
 };
 app.use(cors(corsConfig));
@@ -53,6 +54,11 @@ var db = mongoose.connection;
 db.once('open', function() {
     console.log("MongoDB database connection established successfully");
 })
+
+if (NODE_ENV === 'production') {
+  app.set('trust proxy', true) // trust first proxy
+  //sess.cookie.secure = true // serve secure cookies
+}
 
 
 var sess = {
@@ -69,16 +75,13 @@ var sess = {
         sameSite: true,
         httpOnly: false, //NODE_ENV === 'production' ? true : false, //effects sending cookie
         path: '/',
-        domain: APP_DOMAIN, //|| '127.0.0.1', // change APP_DOMAIN
+        domain: APP_DOMAIN, //|| '127.0.0.1',
         secure: false, //NODE_ENV === 'production', //Effects on reload
         maxAge: parseInt(SESS_LIFETIME) // 1000
       }
     }
 
-if (NODE_ENV === 'production') {
-  app.set('trust proxy', true) // trust first proxy
-  //sess.cookie.secure = true // serve secure cookies
-}
+
 app.use(session(sess))
 
 app.use('/articles', articleRouter);
@@ -92,6 +95,8 @@ app.use(express.static(path.join(__dirname, "client", "build")))
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
+
+
 
 // if (NODE_ENV === 'production') {
 //   // Set static folder
