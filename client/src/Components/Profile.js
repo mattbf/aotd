@@ -82,7 +82,7 @@ function Profile(props) {
   const profileUser = props.match.params.username
   // console.log(props.match.params.username)
   // console.log(user.username)
-  const url = `http://localhost:4000/user/${profileUser}`
+  const url = `/user/${profileUser}`
 
 
 
