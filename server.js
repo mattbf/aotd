@@ -9,7 +9,7 @@ const path = require("path")
 const dotenv = require('dotenv');
 require('dotenv').config();
 //var PORT = serverConfig.PORT
-const APP_DOMAIN = process.env.APP_DOMAIN
+const APP_DOMAIN = process.env.APP_DOMAIN || 'http://localhost:4000'
 const PORT = process.env.PORT || 4000;
 const SESS_LIFETIME = process.env.SESS_LIFETIME || 1000 * 60 * 60 * 24 * 14 //14 days in milliseconds
 const NODE_ENV=process.env.NODE_ENV
@@ -69,7 +69,7 @@ var sess = {
         sameSite: true,
         httpOnly: true, //NODE_ENV === 'production' ? true : false, //effects sending cookie
         path: '/',
-        domain: 'https://aotd.herokuapp.com', //|| '127.0.0.1', // change APP_DOMAIN
+        domain: APP_DOMAIN, //|| '127.0.0.1', // change APP_DOMAIN
         secure: true, //NODE_ENV === 'production', //Effects on reload
         maxAge: parseInt(SESS_LIFETIME) // 1000
       }

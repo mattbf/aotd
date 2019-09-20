@@ -13,7 +13,7 @@ import Todo from './Components/Todo'
 import Admin from './Components/Admin/Admin'
 import useGlobal from './GlobalState/Store/Store';
 import axios from 'axios'
-axios.defaults.withCredentials = true;
+//axios.defaults.withCredentials = true;
 
 // https://aotd.herokuapp.com
 
@@ -49,7 +49,7 @@ function App() {
 
   useEffect(() => {
 
-    axios.get(`/user/auth/`, { withCredentials: true }) // removed ${url}
+    axios.get(`/user/auth/`, { withCredentials: true, useCredentials: true }) // removed ${url}
       .then(response => {
         globalActions.setUser(response.data)
         globalActions.LogInOut(true)
