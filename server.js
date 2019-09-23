@@ -13,10 +13,12 @@ const APP_DOMAIN = process.env.APP_DOMAIN || 'http://localhost:4000'
 const PORT = process.env.PORT || 4000;
 const SESS_LIFETIME = process.env.SESS_LIFETIME || 1000 * 60 * 60 * 24 * 14 //14 days in milliseconds
 const NODE_ENV=process.env.NODE_ENV
-const SESS_NAME=process.env.SESS_NAME //|| "localsession"
-const SESS_SECRET=process.env.SESS_SECRET || "secretphraseLocal"
+const SESS_NAME=process.env.SESS_NAME || "localsession"
+const SESS_SECRET=process.env.SESS_SECRET || "localsessionsecret"
 
-console.log(NODE_ENV === 'production')
+console.log("is Prod: " + NODE_ENV === 'production')
+console.log("Domain: " + APP_DOMAIN)
+console.log("Session Name: " + SESS_NAME + " Lifetime: " + SESS_LIFETIME)
 
 var articleRouter = require('./Routes/ArticleRoutes');
 var userRouter = require('./Routes/UserRoutes')
@@ -27,7 +29,7 @@ var adminRouter = require('./Routes/AdminRoutes')
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
-
+app.set('trust proxy', true)
 app.disable('x-powered-by');
 //app.use(cors());
 app.use(bodyParser.json());
@@ -35,7 +37,7 @@ app.use(bodyParser.json());
 
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", APP_DOMAIN);
+  res.header("Access-Control-Allow-Origin", '127.0.0.1' ); //APP_DOMAIN
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Credentials", true);
   res.header("Access-Control-Allow-Methods", ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"])
@@ -55,10 +57,10 @@ db.once('open', function() {
     console.log("MongoDB database connection established successfully");
 })
 
-if (NODE_ENV === 'production') {
-  app.set('trust proxy', true) // trust first proxy
-  //sess.cookie.secure = true // serve secure cookies
-}
+// if (NODE_ENV === 'production') {
+//   app.set('trust proxy', true) // trust first proxy
+//   //sess.cookie.secure = true // serve secure cookies
+// }
 
 
 var sess = {
@@ -73,9 +75,9 @@ var sess = {
       }),
       cookie: {
         sameSite: true,
-        httpOnly: false, //NODE_ENV === 'production' ? true : false, //effects sending cookie
         path: '/',
-        domain: APP_DOMAIN, //|| '127.0.0.1',
+        domain: '127.0.0.1', //APP_DOMAIN, //|| '127.0.0.1',
+        httpOnly: false, //NODE_ENV === 'production' ? true : false, //effects sending cookie
         secure: false, //NODE_ENV === 'production', //Effects on reload
         maxAge: parseInt(SESS_LIFETIME) // 1000
       }
@@ -97,15 +99,6 @@ app.get("*", (req, res) => {
 });
 
 
-
-// if (NODE_ENV === 'production') {
-//   // Set static folder
-//   app.use(express.static(path.join(__dirname, "client", "build")))
-//
-//   app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-//   });
-// }
 
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
