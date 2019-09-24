@@ -53,7 +53,7 @@ function UserMenu(props) {
 
   const user = props.user
   // const authorLink = `/author/${user.username}`
-  console.log(user)
+  //console.log(user)
   const LogoutUser = props.logout
   return(
     <Popover
@@ -113,7 +113,7 @@ function Navbar(props) {
   function LogoutUser() {
     axios.get('/user/logout')
         .then(response => {
-          console.log("user logged out")
+          //console.log("user logged out")
           globalActions.LogInOut(false)
            history.push('/')
         })

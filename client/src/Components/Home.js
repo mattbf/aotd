@@ -34,7 +34,7 @@ function Home() {
           //setUser(response.data);
           globalActions.setUser(response.data)//check this
           globalActions.LogInOut(true)
-          console.log(response)
+          //console.log(response)
           setFetch({
             isLoading: false,
             isError: false,

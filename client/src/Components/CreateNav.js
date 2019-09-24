@@ -42,7 +42,7 @@ function Navbar(props) {
   const { match, location, history } = props
   const path = match.path
   const isArticle = path == '/article/:title' ? true : false
-
+  
   return (
     <div>
       <Pane display="flex" padding={16} background="#234361" borderRadius={3}>
@@ -52,7 +52,7 @@ function Navbar(props) {
           </Button>
         </Pane>
         <Pane>
-          <Button onClick={PublishArticle} appearance="primary">Publish Article</Button>
+          <Button disabled={!props.canPost} onClick={PublishArticle} appearance="primary">Publish Article</Button>
         </Pane>
       </Pane>
     </div>

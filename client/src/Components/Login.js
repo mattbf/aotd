@@ -58,7 +58,7 @@ function Login(props) {
 
 
   function tryLogin() {
-    axios.post(`/user/`, { // removed ${requrl} 
+    axios.post(`/user/`, { // removed ${requrl}
       logemail: login.email,
       logpassword: login.password,
       withCredentials: true

@@ -67,6 +67,7 @@ function CreateArticle() {
     isError: false,
     error: null
   })
+  const [canPost, setCanPost] = useState(false)
   //For aritlle
   const [editorState, setEditorState] = React.useState(
     EditorState.createEmpty()
@@ -79,6 +80,18 @@ function CreateArticle() {
   editorState.getCurrentContent()
   );
 
+  useEffect(() => {
+    let isPostable = rawContentState.blocks[0].text == "" && title == '' ? false : true
+    console.log("is title empty " + title == '' + title)
+    if (isPostable) {
+      setCanPost(true)
+    } else {
+      setCanPost(false)
+    }
+    // console.log("article info is set: " + canPost )
+    // console.log(rawContentState)
+    // console.log(isPostable)
+  }, [rawContentState])
 
 
   function Publish() {
@@ -118,7 +131,7 @@ function CreateArticle() {
 
   return(
     <div>
-      <CreateNav publish={Publish}/>
+      <CreateNav publish={Publish} canPost={canPost}/>
       <div style={ {
         marginRight: 'auto',
         marginLeft: 'auto',
