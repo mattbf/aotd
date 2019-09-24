@@ -112,29 +112,32 @@ router.route('/delete/id/:id').post(function(req, res) {
 //Post an Article
 router.route('/add').post(function(req, res) {
   let slug = req.body.title
+  console.log("trying to create " + slug)
   Article.findOne({ slug: slug }, function (err, article) {
-    //console.log(slug)
-    if (err) {
-      //article name doesnt exist.. contunue
-      let article = new Article(req.body);
-      article.save()
-          .then(article => {
-              res.status(200).json(
-                {
-                  'article': 'article added successfully',
-                  'body': article
-              });
-          })
-          .catch(err => {
-              res.status(400).json(err);
-              console.log(err)
-              console.log("received request: ")
-              console.log(req.body)
-              //console.log(article)
-          });
+
+    if (article) {
+      console.log("error, aritcle exists")
+      res.status(409).send("Article name already exists")
     } else {
         //console.log(err + 'Could not find article');
-        res.status(409).send("Article name already exists")
+
+        console.log("no article with that title found")
+        let article = new Article(req.body);
+        article.save()
+            .then(article => {
+                res.status(200).json(
+                  {
+                    'article': 'article added successfully',
+                    'body': article
+                });
+            })
+            .catch(err => {
+                res.status(400).json(err);
+                console.log(err)
+                console.log("received request: ")
+                console.log(req.body)
+                //console.log(article)
+            });
     }
   })
 

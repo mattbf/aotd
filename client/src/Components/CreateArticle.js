@@ -82,7 +82,7 @@ function CreateArticle() {
 
   useEffect(() => {
     let isPostable = rawContentState.blocks[0].text == "" && title == '' ? false : true
-    console.log("is title empty " + title == '' + title)
+    //console.log("is title empty " + title == '' + title)
     if (isPostable) {
       setCanPost(true)
     } else {
@@ -123,9 +123,13 @@ function CreateArticle() {
         setFetch({
           isLoading: false,
           isError: true,
-          error: error
+          error: error,
+          status: error.message.substring(error.message.length - 3, error.message.length)
         })
-        console.log(error);
+        console.log(error)
+        console.log(fetch.status)
+        console.log(fetch.status == 409)
+
       })
   }
 
@@ -156,9 +160,14 @@ function CreateArticle() {
             <div>
             {
               fetch.isError ?
-              <Pane background="redTint"style={paper} display="flex" alignItems="center" justifyContent="center" style={{height: '50px'}}>
-                <div style={{color: "#BF0E08"}}> Error: {fetch.error.message} </div>
-              </Pane>
+                fetch.status == "409" ?
+                <Pane background="redTint"style={paper} display="flex" alignItems="center" justifyContent="center" style={{height: '50px'}}>
+                  <div style={{color: "#BF0E08"}}> Error:  That title has already been used </div>
+                </Pane>
+                :
+                <Pane background="redTint"style={paper} display="flex" alignItems="center" justifyContent="center" style={{height: '50px'}}>
+                  <div style={{color: "#BF0E08"}}> Error: {fetch.error.message} </div>
+                </Pane>
               :
               null
             }
