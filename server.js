@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require("path")
+//user session pakckages
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 //import { PORT, NODE_ENV, SESS_NAME, SESS_SECRET, SESS_LIFETIME } from './config'  //require('./config');
 //const serverConfig = require('./config')
 const dotenv = require('dotenv');
@@ -25,9 +28,7 @@ var userRouter = require('./Routes/UserRoutes')
 var adminRouter = require('./Routes/AdminRoutes')
 
 
-//user session pakckages
-var session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
+
 
 app.set('trust proxy', true)
 app.disable('x-powered-by');
@@ -37,12 +38,12 @@ app.use(bodyParser.json());
 
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", '127.0.0.1' ); //APP_DOMAIN
+  res.header("Access-Control-Allow-Origin", APP_DOMAIN ); //APP_DOMAIN
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Credentials", true);
-  res.header("Access-Control-Allow-Methods", ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"])
+
   next();
-});
+}); // remvoed res.header("Access-Control-Allow-Methods", ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"])
 const corsConfig = {
     origin: ['http://localhost:3000', 'https://aotd.herokuapp.com', 'http://localhost:4000' ],
     methods:['GET','POST','OPTIONS', 'HEAD'],
@@ -63,28 +64,44 @@ db.once('open', function() {
 // }
 
 
-var sess = {
+// var sess = {
+//       name: SESS_NAME,
+//       secret: SESS_SECRET,
+//       saveUninitialized: false,
+//       resave: false,
+//       store: new MongoStore({
+//         mongooseConnection: db,
+//         collection: 'session',
+//         ttl: parseInt(SESS_LIFETIME) / 1000 //mongoose takes it in seconds
+//       }),
+//       cookie: {
+//         sameSite: true,
+//         path: '/',
+//         domain: '127.0.0.1', //APP_DOMAIN, //|| '127.0.0.1',
+//         httpOnly: false, //NODE_ENV === 'production' ? true : false, //effects sending cookie
+//         secure: false, //NODE_ENV === 'production', //Effects on reload
+//         maxAge: parseInt(SESS_LIFETIME) // 1000
+//       }
+//     }
+//
+//
+// app.use(session(sess))
+app.use(session({
       name: SESS_NAME,
       secret: SESS_SECRET,
-      saveUninitialized: false,
-      resave: false,
       store: new MongoStore({
         mongooseConnection: db,
         collection: 'session',
-        ttl: parseInt(SESS_LIFETIME) /// 1000 //mongoose takes it in seconds
+        ttl: parseInt(SESS_LIFETIME) / 1000,
       }),
+      saveUninitialized: false,
+      resave: false,
       cookie: {
         sameSite: true,
-        path: '/',
-        domain: '127.0.0.1', //APP_DOMAIN, //|| '127.0.0.1',
-        httpOnly: false, //NODE_ENV === 'production' ? true : false, //effects sending cookie
-        secure: false, //NODE_ENV === 'production', //Effects on reload
-        maxAge: parseInt(SESS_LIFETIME) // 1000
+        secure: NODE_ENV === 'production',
+        maxAge: parseInt(SESS_LIFETIME)
       }
-    }
-
-
-app.use(session(sess))
+    }));
 
 app.use('/articles', articleRouter);
 app.use('/user', userRouter);
