@@ -99,7 +99,8 @@ app.use(session({
       cookie: {
         sameSite: true,
         secure: NODE_ENV === 'production',
-        maxAge: parseInt(SESS_LIFETIME)
+        maxAge: parseInt(SESS_LIFETIME),
+        httpOnly: true,
       }
     }));
 
