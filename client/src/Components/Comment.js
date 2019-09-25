@@ -35,10 +35,10 @@ const commentToolbar = {
 }
 
 function Comment(props) {
-  
+
   const comment = props.comment
   const timeago = timeDifferenceForDate(comment.date)
-  console.log(comment)
+  //console.log(comment)
   return(
     <Pane style={commentWrapper}>
       <Avatar name={comment.author} size={40} />

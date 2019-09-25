@@ -42,8 +42,8 @@ function Article(props) {
   const slug = PrettyUrl(articleTitle)
   const url = `http://localhost:4000/articles/${slug}` //http://localhost:4000
   //const domain = process.env.APP_DOMAIN
+  const requrl = 'https//aotd.herokuapp.com'//process.env.APP_DOMAIN || 'http://localhost:4000'
   const copyUrl = `${requrl}/${slug}` || `http://localhost:4000/article/${slug}`
-  const requrl = process.env.APP_DOMAIN || 'http://localhost:4000'
   //const id = props.id
   const [fetch, setFetch] = useState({
     isLoading: false,
@@ -84,6 +84,15 @@ function Article(props) {
       commentSet: true,
       error: null
     })
+    console.log("Editor State")
+    console.log(rawCommentContentState)
+    console.log(rawCommentContentState.blocks[0])
+    console.log(rawCommentContentState.blocks[0].text)
+
+    if(rawCommentContentState.blocks[0].text == "Your Comment here...") {
+      const emptyState = EditorState.push(editorState, ContentState.createFromText(''));
+      setCommentsEditorState(emptyState)
+    }
   }
 
 
@@ -91,7 +100,8 @@ function Article(props) {
     commentsEditorState.getCurrentContent()
   );
   // //Blank Comment editor state
-  // const emptyContent = {"entityMap":{},"blocks":[{"key":"637gr","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
+  //const emptyContent = {"entityMap":{},"blocks":[{"key":"637gr","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
+  //"{\"blocks\":[{\"key\":\"637gr\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
   // //when the comment box is clicked clear the state
   // if (commentFetch.commentSet) {
   //   setCommentsEditorState(emptyContent)

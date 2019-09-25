@@ -8,7 +8,7 @@ import '../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 function CommentViewer(props) {
   const content = props.comment.body
-  console.log(content)
+  //console.log(content)
   const [editorState, setEditorState] = React.useState(
     EditorState.createWithContent(convertFromRaw(JSON.parse(content)))
     //EditorState.createEmpty()
@@ -19,7 +19,7 @@ function CommentViewer(props) {
   }
 
   useEffect(() => {
-    console.log('loaded')
+    //console.log('loaded')
     setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(content))))
   }, [])
 

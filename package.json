@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js && cd client && npm start",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
+    "dev": "nodemon server && cd client && npm start"
   },
   "keywords": [],
   "author": "",
