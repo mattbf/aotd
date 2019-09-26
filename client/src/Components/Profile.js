@@ -5,6 +5,8 @@ import { HashLink as SectionLink } from 'react-router-hash-link';
 import Navbar from './Navbar'
 import StatBox from './StatBox'
 import axios from 'axios'
+import MetaTags from 'react-meta-tags';
+import MetaImg from '../AOTD-metaimage.png'
 
 import {
   Pane,
@@ -193,6 +195,11 @@ function Profile(props) {
   const joinedDate = profile.user.createdAt ? new Date(profile.user.createdAt).toLocaleDateString("en-US", dateoptions) : ""
   return(
     <div>
+      <MetaTags>
+        <title>AOTD | {user.username} </title>
+        <meta name="description" content="Article of the day - Where curious minds discuss" />
+        <meta property="og:image" content={MetaImg} />
+      </MetaTags>
       <Navbar/>
       <div style={Editbutton}>
         {isCurrentUser ? <IconButton onClick={() => setEdit(!edit)} appearance="minimal" icon="edit" /> : null}
