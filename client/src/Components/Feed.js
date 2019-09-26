@@ -10,7 +10,7 @@ import {
 
 function Feed() {
   const url = process.env.APP_DOMAIN || 'http://localhost:4000'
-  const baseUrl = process.env.NODE_ENV == "production" ? process.env.APP_DOMAIN : 'http://localhost:4000'
+  const baseUrl = process.env.NODE_ENV == "production" ? null : 'http://localhost:4000'
   const [feed, setFeed] = useState([])
   const articleCount = feed.length
   const [fetch, setFetch] = useState({
@@ -33,6 +33,7 @@ function Feed() {
               isError: false,
               error: null
             })
+            console.log(feed)
         })
         .catch(function (error){
             setFetch({

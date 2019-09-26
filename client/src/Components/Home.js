@@ -20,8 +20,8 @@ function Home() {
   const [globalState, globalActions] = useGlobal();
   const user = globalState.user
   const auth = globalState.isAuth
-  const baseUrl = process.env.NODE_ENV == "production" ? process.env.APP_DOMAIN : 'http://localhost:4000'
-  
+  const baseUrl = process.env.NODE_ENV == "production" ? null : 'http://localhost:4000'
+
   const [fetch, setFetch] = useState({
     isLoading: false,
     isError: false,

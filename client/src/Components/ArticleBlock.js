@@ -40,7 +40,7 @@ function ArticleBlock(props) {
                 <Heading style={articleLink} size={600} >{props.article.title}</Heading>
               </Link>
               <div flex={1} alignItems="center" display="flex">
-                <Text size={300} marginRight={3}>Posted by </Text>
+                <Text size={300} marginRight={1}>Posted by </Text>
                 <Link to={authorLink} style={{marginTop: '-4px'}}>
                   <Text size={300} marginRight={3}>{props.article.author}</Text>
                 </Link>
