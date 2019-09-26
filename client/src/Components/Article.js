@@ -79,6 +79,8 @@ function Article(props) {
   const [commentsEditorState, setCommentsEditorState] = React.useState(
     EditorState.createEmpty()
   );
+  const [clearComment, setClearComment] = useState(0)
+
   const onChangeCommentsEditor = (commentsEditorState) => {
     setCommentsEditorState(commentsEditorState)
     setCommentFetch({
@@ -92,9 +94,10 @@ function Article(props) {
     console.log(rawCommentContentState.blocks[0])
     console.log(rawCommentContentState.blocks[0].text)
 
-    if(rawCommentContentState.blocks[0].text == "Your Comment here...") {
+    if(rawCommentContentState.blocks[0].text == undefined || "Your Comment here..." && clearComment == 0) {
       const emptyState = EditorState.push(editorState, ContentState.createFromText(''));
       setCommentsEditorState(emptyState)
+      setClearComment(1)
     }
   }
 
@@ -102,13 +105,7 @@ function Article(props) {
   const rawCommentContentState = convertToRaw(
     commentsEditorState.getCurrentContent()
   );
-  // //Blank Comment editor state
-  //const emptyContent = {"entityMap":{},"blocks":[{"key":"637gr","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
-  //"{\"blocks\":[{\"key\":\"637gr\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-  // //when the comment box is clicked clear the state
-  // if (commentFetch.commentSet) {
-  //   setCommentsEditorState(emptyContent)
-  // }
+
 
   useEffect(() => {
     setFetch({

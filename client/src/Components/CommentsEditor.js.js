@@ -7,7 +7,7 @@ import '../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 
 function ArticleEditor(props) {
-  const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Your Comment here...","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
+  //const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Your Comment here...","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
   // constructor(props) {
   //   super(props);
   //   this.state = {
@@ -29,7 +29,7 @@ function ArticleEditor(props) {
         wrapperClassName="demo-wrapper"
         editorClassName="demo-editor"
         onEditorStateChange={props.onChange}
-        contentState={content}
+        //contentState={content}
         height='100%'
         toolbar={{
           options: ['inline',
