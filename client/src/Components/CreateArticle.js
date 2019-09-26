@@ -57,6 +57,9 @@ function CreateArticle() {
   const user = globalState.user
   const auth = globalState.isAuth
 
+  const baseUrl = 'http://localhost:4000'
+  const apiUrl = process.env.NODE_ENV == "production" ? `/articles/add` : `${baseUrl}/articles/add` 
+
   const windowSize = useWindowSize()
   const isMobile = windowSize.width < 500 ? true : false
 
@@ -102,7 +105,7 @@ function CreateArticle() {
     })
     axios({
       method: 'post',
-      url: `${baseUrl}/articles/add`,
+      url: apiUrl,
       data:{
       	title: title,
       	author: user.username,
