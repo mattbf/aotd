@@ -23,6 +23,7 @@ const center = {
 
 function Login(props) {
   const requrl = process.env.APP_DOMAIN || 'http://localhost:4000'
+  const baseUrl = process.env.NODE_ENV == "production" ? process.env.APP_DOMAIN : 'http://localhost:4000'
   const [globalState, globalActions] = useGlobal();
   const location = props.location
   const browserHistory = props.history
@@ -58,7 +59,7 @@ function Login(props) {
 
 
   function tryLogin() {
-    axios.post(`/user/`, { // removed ${requrl}
+    axios.post(`${baseUrl}/user/`, { // removed ${requrl}
       logemail: login.email,
       logpassword: login.password,
       withCredentials: true

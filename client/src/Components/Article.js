@@ -31,6 +31,7 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 //const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Initialized from content state.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
 
 function Article(props) {
+  const baseUrl = process.env.NODE_ENV == "production" ? process.env.APP_DOMAIN : 'http://localhost:4000'
   const [globalState, globalActions] = useGlobal();
   const user = globalState.user
   const auth = globalState.isAuth
@@ -115,7 +116,7 @@ function Article(props) {
     })
 
     //console.log(url)
-    axios.get(`/articles/${slug}`, {withCredentials: true, useCredentials: true }) //removed ${requrl} from start of url
+    axios.get(`${baseUrl}/articles/${slug}`, {withCredentials: true, useCredentials: true }) //removed ${requrl} from start of url
         .then(response => {
             // console.log("fetched article")
             console.log(response.data.body)
@@ -158,7 +159,7 @@ function Article(props) {
       commentSet: true,
       error: null
     })
-    const commenturl = `/articles/${slug}/comments`
+    const commenturl = `${baseUrl}/articles/${slug}/comments`
     axios({
       method: 'post',
       url: commenturl,

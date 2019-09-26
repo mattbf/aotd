@@ -52,6 +52,7 @@ const TitleBox = {
 
 
 function CreateArticle() {
+  const baseUrl = process.env.NODE_ENV == "production" ? process.env.APP_DOMAIN : 'http://localhost:4000'
   const [globalState, globalActions] = useGlobal();
   const user = globalState.user
   const auth = globalState.isAuth
@@ -93,7 +94,6 @@ function CreateArticle() {
     // console.log(isPostable)
   }, [rawContentState])
 
-
   function Publish() {
     setFetch({
       isLoading: true,
@@ -102,7 +102,7 @@ function CreateArticle() {
     })
     axios({
       method: 'post',
-      url: '/articles/add',
+      url: `${baseUrl}/articles/add`,
       data:{
       	title: title,
       	author: user.username,

@@ -76,13 +76,14 @@ const Editbutton = {
 }
 
 function Profile(props) {
+  const baseUrl = process.env.NODE_ENV == "production" ? process.env.APP_DOMAIN : 'http://localhost:4000'
   const [globalState, globalActions] = useGlobal();
   const user = globalState.user
   const auth = globalState.isAuth
   const profileUser = props.match.params.username
   // console.log(props.match.params.username)
   // console.log(user.username)
-  const url = `/user/${profileUser}`
+  const url = `${baseUrl}/user/${profileUser}`
 
 
 
@@ -113,7 +114,7 @@ function Profile(props) {
       isError: false,
       error: null
     })
-    const url = `/user/${user.username}/update`
+    const url = `${baseUrl}/user/${user.username}/update`
     axios({
       method: 'post',
       url: url,

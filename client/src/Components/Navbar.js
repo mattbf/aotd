@@ -46,9 +46,10 @@ function UserMenu(props) {
   // const [user, setUser] = useState({
   //   username: "username",
   // })
+  const baseUrl = process.env.NODE_ENV == "production" ? process.env.APP_DOMAIN : 'http://localhost:4000'
   const [authorLink, setAuthorLink] = useState('/')
   useEffect(() => {
-    setAuthorLink(`/author/${user.username}`)
+    setAuthorLink(`${baseUrl}/author/${user.username}`)
   }, [])
 
   const user = props.user
@@ -100,6 +101,7 @@ function Navbar(props) {
   const [globalState, globalActions] = useGlobal();
   const auth = globalState.isAuth
   const user = globalState.user
+  const baseUrl = process.env.NODE_ENV == "production" ? process.env.APP_DOMAIN : 'http://localhost:4000'
 
   const windowSize = useWindowSize()
   const isMobile = windowSize.width < 500 ? true : false
@@ -111,7 +113,7 @@ function Navbar(props) {
   // console.log(isMobile)
   const browserHistory = props.history
   function LogoutUser() {
-    axios.get('/user/logout')
+    axios.get(`${baseUrl}/user/logout/`)
         .then(response => {
           //console.log("user logged out")
           globalActions.LogInOut(false)

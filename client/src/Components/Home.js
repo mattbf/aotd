@@ -15,13 +15,13 @@ import {
 
 //axios.defaults.crossdomain = true;
 
-//const url = process.env.APP_DOMAIN || 'http://localhost:4000'
 
 function Home() {
   const [globalState, globalActions] = useGlobal();
   const user = globalState.user
   const auth = globalState.isAuth
-
+  const baseUrl = process.env.NODE_ENV == "production" ? process.env.APP_DOMAIN : 'http://localhost:4000'
+  
   const [fetch, setFetch] = useState({
     isLoading: false,
     isError: false,
@@ -29,7 +29,7 @@ function Home() {
   })
   useEffect(() => {
     if (!user.username) {
-      axios.get('/user/auth/', { withCredentials: true })
+      axios.get(`${baseUrl}/user/auth/`, { withCredentials: true })
         .then(response => {
           //setUser(response.data);
           globalActions.setUser(response.data)//check this
