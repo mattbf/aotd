@@ -27,6 +27,8 @@ import {
 } from 'evergreen-ui'
 
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import MetaTags from 'react-meta-tags';
+import MetaImg from '../AOTD-metaimage.png'
 
 //const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Initialized from content state.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
 
@@ -193,6 +195,12 @@ function Article(props) {
   return(
 
     <div>
+      <MetaTags>
+        <title>AOTD | {articleTitle}</title>
+        <meta name="description" content="Some description." />
+        <meta property="og:title" content="MyApp" />
+        <meta property="og:image" content={MetaImg} />
+      </MetaTags>
       <Navbar/>
       <div style={{width: '100%', display: 'flex', alignItems: 'flex-end' }}>
         <CopyToClipboard text={copyUrl}

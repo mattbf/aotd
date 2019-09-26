@@ -46,10 +46,9 @@ function UserMenu(props) {
   // const [user, setUser] = useState({
   //   username: "username",
   // })
-  const baseUrl = process.env.NODE_ENV == "production" ? process.env.APP_DOMAIN : 'http://localhost:4000'
   const [authorLink, setAuthorLink] = useState('/')
   useEffect(() => {
-    setAuthorLink(`${baseUrl}/author/${user.username}`)
+    setAuthorLink(`/author/${user.username}`)
   }, [])
 
   const user = props.user
@@ -123,6 +122,21 @@ function Navbar(props) {
             console.log(error);
         })
   }
+
+  // useEffect(() => {
+  //   if (!user.username) {
+  //     axios.get(`${baseUrl}/user/auth/`, { withCredentials: true })
+  //       .then(response => {
+  //         //setUser(response.data);
+  //         globalActions.setUser(response.data)//check this
+  //         globalActions.LogInOut(true)
+  //         //console.log(response
+  //       })
+  //       .catch(function(error) {
+  //         console.log(error);
+  //       })
+  //   }
+  // }, [])
   return (
     <div>
       <Pane display="flex" padding={16} background="#234361" borderRadius={3}>

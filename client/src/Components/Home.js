@@ -14,6 +14,8 @@ import {
 //import { logIn } from '../Store';
 
 //axios.defaults.crossdomain = true;
+import MetaTags from 'react-meta-tags';
+import MetaImg from '../AOTD-metaimage.png'
 
 
 function Home() {
@@ -54,6 +56,11 @@ function Home() {
 
   return(
     <div>
+      <MetaTags>
+        <title>Article of the Day</title>
+        <meta name="description" content="Article of the day - Where curious minds discuss" />
+        <meta property="og:image" content={MetaImg} />
+      </MetaTags>
       <Navbar user={user} auth={auth}/>
       <Feed/>
     </div>
