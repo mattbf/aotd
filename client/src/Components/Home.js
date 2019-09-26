@@ -22,7 +22,8 @@ function Home() {
   const [globalState, globalActions] = useGlobal();
   const user = globalState.user
   const auth = globalState.isAuth
-  const baseUrl = process.env.NODE_ENV == "production" ? null : 'http://localhost:4000'
+  const baseUrl = 'http://localhost:4000'
+  const apiUrl = process.env.NODE_ENV == "production" ? `/user/auth/`: `${baseUrl}/user/auth/`
 
   const [fetch, setFetch] = useState({
     isLoading: false,
@@ -31,7 +32,7 @@ function Home() {
   })
   useEffect(() => {
     if (!user.username) {
-      axios.get(`${baseUrl}/user/auth/`, { withCredentials: true })
+      axios.get(apiUrl, { withCredentials: true }) //${baseUrl}
         .then(response => {
           //setUser(response.data);
           globalActions.setUser(response.data)//check this

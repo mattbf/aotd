@@ -10,7 +10,8 @@ import {
 
 function Feed() {
   const url = process.env.APP_DOMAIN || 'http://localhost:4000'
-  const baseUrl = process.env.NODE_ENV == "production" ? null : 'http://localhost:4000'
+  const baseUrl = 'http://localhost:4000'
+  const apiUrl = process.env.NODE_ENV == "production" ? `/articles`: `${baseUrl}/articles`
   const [feed, setFeed] = useState([])
   const articleCount = feed.length
   const [fetch, setFetch] = useState({
@@ -25,7 +26,7 @@ function Feed() {
       isError: false,
       error: null
     })
-    axios.get(`${baseUrl}/articles`) // removed  ${url}
+    axios.get(apiUrl) // ${baseUrl}
         .then(response => {
             setFeed(response.data);
             setFetch({

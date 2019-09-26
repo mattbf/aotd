@@ -39,7 +39,8 @@ const centerBlockBlank = {
 
 function App() {
   //const isMobile = useMediaQuery({ maxWidth: 767 })
-  const baseUrl = process.env.NODE_ENV == "production" ? null : 'http://localhost:4000'
+  const baseUrl = 'http://localhost:4000'
+  const apiUrl = process.env.NODE_ENV == "production" ? `/user/auth/`: `${baseUrl}/user/auth/`
   const [globalState, globalActions] = useGlobal();
   const [fetch, setFetch] = useState({
     isLoading: false,
@@ -51,7 +52,7 @@ function App() {
 
   useEffect(() => {
 
-    axios.get(`${baseUrl}/user/auth/`, { withCredentials: true, useCredentials: true }) // removed ${url}
+    axios.get(apiUrl, { withCredentials: true, useCredentials: true }) // ${baseUrl}
       .then(response => {
         globalActions.setUser(response.data)
         globalActions.LogInOut(true)

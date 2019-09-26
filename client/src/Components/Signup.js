@@ -21,7 +21,8 @@ const center = {
 }
 
 function Signup(props) {
-  const baseUrl = process.env.NODE_ENV == "production" ? process.env.APP_DOMAIN : 'http://localhost:4000'
+  const baseUrl = 'http://localhost:4000'
+  const apiUrl = process.env.NODE_ENV == "production" ? `/user/`: `${baseUrl}/user`
   const [globalState, globalActions] = useGlobal();
   const browserHistory = props.history
   const [login, setLogin] = useState({
@@ -40,7 +41,7 @@ function Signup(props) {
   })
 
   function Signup() {
-    axios.post(`${baseUrl}/user/`, {
+    axios.post(apiUrl, {
       username: login.username,
       email: login.email,
       password: login.password,

@@ -100,7 +100,8 @@ function Navbar(props) {
   const [globalState, globalActions] = useGlobal();
   const auth = globalState.isAuth
   const user = globalState.user
-  const baseUrl = process.env.NODE_ENV == "production" ? process.env.APP_DOMAIN : 'http://localhost:4000'
+  const baseUrl = 'http://localhost:4000'
+  const apiUrl = process.env.NODE_ENV == "production" ? `/user/logout/`: `${baseUrl}/user/logout/`
 
   const windowSize = useWindowSize()
   const isMobile = windowSize.width < 500 ? true : false
@@ -112,7 +113,7 @@ function Navbar(props) {
   // console.log(isMobile)
   const browserHistory = props.history
   function LogoutUser() {
-    axios.get(`${baseUrl}/user/logout/`)
+    axios.get(apiUrl)
         .then(response => {
           //console.log("user logged out")
           globalActions.LogInOut(false)

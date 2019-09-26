@@ -33,16 +33,19 @@ import MetaImg from '../AOTD-metaimage.png'
 //const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Initialized from content state.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
 
 function Article(props) {
-  const baseUrl = process.env.NODE_ENV == "production" ? null : 'http://localhost:4000'
   const [globalState, globalActions] = useGlobal();
   const user = globalState.user
   const auth = globalState.isAuth
+  const articleTitle = props.match.params.title
+  const slug = PrettyUrl(articleTitle)
+
+  const baseUrl = 'http://localhost:4000'
+  const apiUrl = process.env.NODE_ENV == "production" ? `/articles/${slug}`: `${baseUrl}/articles/${slug}`
 
   const windowSize = useWindowSize()
   const isMobile = windowSize.width < 500 ? true : false
 
-  const articleTitle = props.match.params.title
-  const slug = PrettyUrl(articleTitle)
+  console.log(apiUrl)
   const url = `http://localhost:4000/articles/${slug}` //http://localhost:4000
   //const domain = process.env.APP_DOMAIN
   const requrl = 'https//aotd.herokuapp.com'//process.env.APP_DOMAIN || 'http://localhost:4000'
@@ -89,10 +92,6 @@ function Article(props) {
       commentSet: true,
       error: null
     })
-    console.log("Editor State")
-    console.log(rawCommentContentState)
-    console.log(rawCommentContentState.blocks[0])
-    console.log(rawCommentContentState.blocks[0].text)
 
     if(rawCommentContentState.blocks[0].text == undefined || "Your Comment here..." && clearComment == 0) {
       const emptyState = EditorState.push(editorState, ContentState.createFromText(''));
@@ -115,7 +114,7 @@ function Article(props) {
     })
 
     //console.log(url)
-    axios.get(`${baseUrl}/articles/${slug}`, {withCredentials: true, useCredentials: true }) //removed ${requrl} from start of url
+    axios.get(apiUrl, {withCredentials: true, useCredentials: true }) //removed ${requrl} from start of url
         .then(response => {
             // console.log("fetched article")
             console.log(response.data.body)
@@ -158,7 +157,7 @@ function Article(props) {
       commentSet: true,
       error: null
     })
-    const commenturl = `${baseUrl}/articles/${slug}/comments`
+    const commenturl = process.env.NODE_ENV == "production" ? `/articles/${slug}/comments`: `${baseUrl}/articles/${slug}/comments`
     axios({
       method: 'post',
       url: commenturl,
