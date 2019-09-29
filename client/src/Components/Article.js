@@ -37,7 +37,7 @@ function Article(props) {
   const user = globalState.user
   const auth = globalState.isAuth
   const articleTitle = props.match.params.title
-  const slug = encodeURIComponent(PrettyUrl(articleTitle))
+  const slug = PrettyUrl(articleTitle)
 
   const baseUrl = 'http://localhost:4000'
   const apiUrl = process.env.NODE_ENV == "production" ? `/articles/${slug}`: `${baseUrl}/articles/${slug}`

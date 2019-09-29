@@ -86,7 +86,7 @@ function CreateArticle() {
   );
 
   useEffect(() => {
-    let isPostable = rawContentState.blocks[0].text == "" || title == '' ? false : true
+    let isPostable = rawContentState.blocks[0].text == "" || title == '' || title.includes("%") ? false : true
     //console.log("is title empty " + title == '' + title)
     if (isPostable) {
       setCanPost(true)
@@ -154,6 +154,13 @@ function CreateArticle() {
         flexDirection: 'column',
         alignItems: 'center',
       }}>
+        {title.includes("%") ?
+          <Pane background="redTint"style={paper} display="flex" alignItems="center" justifyContent="center" style={{height: '50px'}}>
+            <div style={{color: "#BF0E08"}}> you can&apos;t have % symbols in your title - club rules</div>
+          </Pane>
+          :
+          null
+        }
         <Heading marginBottom="10px" size={700}> Article Title </Heading>
         <TextInput
           onChange={e => setTitle(e.target.value)}
