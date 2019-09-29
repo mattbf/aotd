@@ -51,7 +51,7 @@ router.route('/:slug').get(function(req, res) {
 });
 //delte and article by slug
 router.route('/delete/:slug').post(function(req, res) {
-  let slug = req.params.slug;
+  let slug = encodeURIComponent(req.params.slug);
   User.findById(req.session.userId, function (error, user) {
     if (error || !user) {
       res.status(400).send('Not logged in');
@@ -111,7 +111,7 @@ router.route('/delete/id/:id').post(function(req, res) {
 });
 //Post an Article
 router.route('/add').post(function(req, res) {
-  let slug = req.body.title
+  let slug = encodeURIComponent(req.body.title)
   console.log("trying to create " + slug)
   Article.findOne({ slug: slug }, function (err, article) {
 
@@ -144,7 +144,7 @@ router.route('/add').post(function(req, res) {
 });
 //Add comments to an article
 router.route('/:slug/comments').post(function(req, res) {
-    let slug = req.params.slug;
+    let slug = encodeURIComponent(req.params.slug);
     //console.log("comments atempt")
     console.log(slug)
     if (req.body.body) {
