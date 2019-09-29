@@ -32,17 +32,7 @@ import {
 //   },
 // ]
 
-const StatsArray = {
-  display: 'flex',
-  flexDirection: 'row',
-  //width: '60%',
-  //justifyContent: 'center',
-  alignItems: 'flex-start',
-  height: '100%',
-  marginLeft: 'auto',
-  marginBottom: '15px',
 
-}
 
 const UserBox = {
   display: 'flex',
@@ -50,6 +40,7 @@ const UserBox = {
   alignItems: 'flex-start',
   justifyContent: 'flex-start',
   marginBottom: '15px',
+  flexWrap: 'wrap',
 }
 
 const ProfileBox = {
@@ -64,9 +55,7 @@ const TopProfile = {
   alignItems: 'center',
   minHeight: '300px',
 }
-const UserInfoBox = {
-  marginLeft: '10px',
-}
+
 const biotext = {
   marginTop: '15px',
   marginBottom: '15px',
@@ -239,11 +228,25 @@ function Profile(props) {
             <div style={ProfileBox}>
               <div style={UserBox}>
                 <Avatar name={profile.user.username} size={60} />
-                <div style={UserInfoBox}>
+                <div style={{
+                  padding: '20px',
+                  width: isMobile ? '70%' : '30%',
+                }}>
                   <Heading size={600}> {profile.user.username} </Heading>
                   <Heading size={300}> Joined: {joinedDate} </Heading>
                 </div>
-                <div style={StatsArray}>
+                <div style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  //width: '60%',
+                  //justifyContent: 'center',
+                  alignItems: 'flex-start',
+                  height: '100%',
+                  marginLeft: isMobile ? '0' : 'auto',
+                  marginBottom: '15px',
+                  marginTop: '25px',
+
+                }}>
                   {stats.map((stat, index) =>
                     <StatBox index={index} value={stat.value} label={stat.label}/>
                   )}
