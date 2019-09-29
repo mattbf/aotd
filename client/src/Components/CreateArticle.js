@@ -52,13 +52,12 @@ const TitleBox = {
 
 
 function CreateArticle() {
-  const baseUrl = process.env.NODE_ENV == "production" ? process.env.APP_DOMAIN : 'http://localhost:4000'
   const [globalState, globalActions] = useGlobal();
   const user = globalState.user
   const auth = globalState.isAuth
 
   const baseUrl = 'http://localhost:4000'
-  const apiUrl = process.env.NODE_ENV == "production" ? `/articles/add` : `${baseUrl}/articles/add` 
+  const apiUrl = process.env.NODE_ENV == "production" ? `/articles/add` : `${baseUrl}/articles/add`
 
   const windowSize = useWindowSize()
   const isMobile = windowSize.width < 500 ? true : false

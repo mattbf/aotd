@@ -106,6 +106,7 @@ function Login(props) {
           width="100%"
           value={login.email}
           onChange={updateField}
+          height={40}
         />
         <TextInput
           name="password"
@@ -115,12 +116,14 @@ function Login(props) {
           width="100%"
           value={login.password}
           onChange={updateField}
+          height={40}
         />
         <Button
           width='100%'
           appearance="primary"
           style={{display: 'flex', justifyContent: 'center'}}
           onClick={tryLogin}
+          height={40}
         >
           {fetch.isLoading ?
             <Spinner size={16} style={{color: '#FFFFFF'}}/>
