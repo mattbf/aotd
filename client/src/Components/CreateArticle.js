@@ -144,6 +144,7 @@ function CreateArticle() {
         marginRight: 'auto',
         marginLeft: 'auto',
         marginTop: '25px',
+        marginBottom: '25px',
         width: isMobile ? '95%' : '60%',
         display: 'flex',
         flexDirection: 'column',
