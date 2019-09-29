@@ -104,13 +104,12 @@ function Navbar(props) {
   const apiUrl = process.env.NODE_ENV == "production" ? `/user/logout/`: `${baseUrl}/user/logout/`
 
   const windowSize = useWindowSize()
-  const isMobile = windowSize.width < 500 ? true : false
+  const isMobile = windowSize.width < 700 ? true : false
 
   const { match, location, history } = props
   const path = match.path
   const isArticle = path == 'http://localhost:4000/article/:title' ? true : false
-  // console.log(windowSize.width)
-  // console.log(isMobile)
+
   const browserHistory = props.history
   function LogoutUser() {
     axios.get(apiUrl)
@@ -149,7 +148,11 @@ function Navbar(props) {
             <div>
               <Link to='/' style={{marginRight: '12px', margin: '0px', textDecoration: 'none'}}>
                 <Heading size={700} style={lightText}>AOTD</Heading>
-                <Heading size={200} style={lightText}>Article Of The Day (beta)</Heading>
+                {isMobile ?
+                  <Heading size={200} style={lightText}>(beta)</Heading>
+                  :
+                  <Heading size={200} style={lightText}>Article Of The Day (beta)</Heading>
+                }
               </Link>
             </div>
 

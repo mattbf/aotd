@@ -244,7 +244,7 @@ function Profile(props) {
                   height: '100%',
                   marginLeft: isMobile ? '0' : 'auto',
                   marginBottom: '15px',
-                  marginTop: '25px',
+                  marginTop: isMobile ? '25px' : "0px",
 
                 }}>
                   {stats.map((stat, index) =>
