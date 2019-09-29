@@ -30,7 +30,8 @@ const ArticleWrapper = {
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingBottom: '30px',
 }
 const paper = {
   backgroundColor: '#FFFFFF',
@@ -148,7 +149,7 @@ function CreateArticle() {
         width: isMobile ? '95%' : '60%',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
       }}>
         <Heading marginBottom="10px" size={700}> Article Title </Heading>
         <TextInput
