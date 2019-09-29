@@ -155,6 +155,7 @@ function CreateArticle() {
           value={title}
           width="100%"
           height={40}
+          fontSize='16px'
         />
       </div>
       <div style={ArticleWrapper}>

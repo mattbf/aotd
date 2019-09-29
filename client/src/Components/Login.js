@@ -111,6 +111,7 @@ function Login(props) {
           value={login.email}
           onChange={updateField}
           height={40}
+          fontSize='16px'
         />
         <TextInput
           name="password"
@@ -121,6 +122,7 @@ function Login(props) {
           value={login.password}
           onChange={updateField}
           height={40}
+          fontSize='16px'
         />
         <Button
           width='100%'

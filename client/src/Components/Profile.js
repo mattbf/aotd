@@ -258,6 +258,7 @@ function Profile(props) {
                     <Textarea
                       onChange={e => setBio( e.target.value )}
                       value={bio}
+                      fontSize='16px'
                     />
                     <div style={{width: '100%', display: 'flex', alignItems: 'flex-end'}}>
                       <div style={{marginLeft: 'auto', marginRight: '0px'}}>
@@ -273,7 +274,7 @@ function Profile(props) {
                     }
                   </div>
                   :
-                  <Text size={500}>
+                  <Text size={500} fontSize='16px'>
                     {profile.user.bio}
                   </Text>
                 }

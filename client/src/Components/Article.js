@@ -191,9 +191,7 @@ function Article(props) {
 
 
   return(
-
     <div>
-    <div> is Mobile? {isMobile.toString()} </div>
       <MetaTags>
         <title>AOTD | {articleTitle}</title>
         <meta name="description" content="Some description." />

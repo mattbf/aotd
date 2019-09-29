@@ -85,6 +85,7 @@ function Signup(props) {
           value={login.username}
           onChange={updateField}
           height={40}
+          fontSize='16px'
         />
         <TextInput
           name="email"
@@ -95,6 +96,7 @@ function Signup(props) {
           value={login.email}
           onChange={updateField}
           height={40}
+          fontSize='16px'
         />
         <TextInput
           name="password"
@@ -105,6 +107,7 @@ function Signup(props) {
           value={login.password}
           onChange={updateField}
           height={40}
+          fontSize='16px'
         />
         <Button
           width='100%'
@@ -113,6 +116,7 @@ function Signup(props) {
           onClick={Signup}
           isLoading={fetch.isLoading}
           height={40}
+          fontSize='16px'
         >
           {fetch.isLoading ?
             <Spinner size={16} style={{color: '#FFFFFF'}}/>
