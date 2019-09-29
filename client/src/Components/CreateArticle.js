@@ -155,7 +155,7 @@ function CreateArticle() {
         alignItems: 'center',
       }}>
         {title.includes("%") ?
-          <Pane background="redTint"style={paper} display="flex" alignItems="center" justifyContent="center" style={{height: '50px'}}>
+          <Pane background="redTint"style={paper} display="flex" alignItems="center" justifyContent="center" style={{height: '50px', paddingLeft: '15px', paddingRight: '15px',}}>
             <div style={{color: "#BF0E08"}}> you can&apos;t have % symbols in your title - club rules</div>
           </Pane>
           :

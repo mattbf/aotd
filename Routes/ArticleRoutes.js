@@ -33,8 +33,8 @@ router.route('/:slug').get(function(req, res) {
         if (user === null) {
           return res.status(401).send("Not authorized. UserSession: " + req.session);
         } else {
-          let slug = req.params.slug;
-          Article.findOne({ title: slug }, function (err, article) {
+          let slug = encodeURIComponent(req.params.slug);
+          Article.findOne({ slug: slug }, function (err, article) {
             //console.log(slug)
             if (err) {
                 console.log(err + 'Could not find article');
