@@ -75,7 +75,7 @@ function Signup(props) {
   return(
     <div style={center}>
       <Pane padding={15} background="tint1" display="flex" flexDirection="column" alignItems="center">
-        <Heading size={500} marginBottom={20} >Sing up to start discussing Articles!</Heading>
+        <Heading size={500} marginBottom={20} >Sign up to start discussing Articles!</Heading>
         <TextInput
           name="username"
           type="text"

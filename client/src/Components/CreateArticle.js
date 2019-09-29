@@ -71,6 +71,7 @@ function CreateArticle() {
     error: null
   })
   const [canPost, setCanPost] = useState(false)
+
   //For aritlle
   const [editorState, setEditorState] = React.useState(
     EditorState.createEmpty()
@@ -84,7 +85,7 @@ function CreateArticle() {
   );
 
   useEffect(() => {
-    let isPostable = rawContentState.blocks[0].text == "" && title == '' ? false : true
+    let isPostable = rawContentState.blocks[0].text == "" || title == '' ? false : true
     //console.log("is title empty " + title == '' + title)
     if (isPostable) {
       setCanPost(true)
@@ -126,7 +127,7 @@ function CreateArticle() {
           isLoading: false,
           isError: true,
           error: error,
-          status: error.message.substring(error.message.length - 3, error.message.length)
+          status: canPost ? error.message.substring(error.message.length - 3, error.message.length) : 999 //body is emppy
         })
         console.log(error)
         console.log(fetch.status)
@@ -134,6 +135,7 @@ function CreateArticle() {
 
       })
   }
+  const isBody = true
 
   return(
     <div>
@@ -152,6 +154,7 @@ function CreateArticle() {
           onChange={e => setTitle(e.target.value)}
           value={title}
           width="100%"
+          height={40}
         />
       </div>
       <div style={ArticleWrapper}>
@@ -179,6 +182,7 @@ function CreateArticle() {
                 <Pane elevation={1} style={paper} padding={24}>
                   <ArticleEditor readOnly={false} editorState={editorState} onChange={onChangeEditor}/>
                 </Pane>
+
                 :
                 <Pane style={paper} display="flex" alignItems="center" justifyContent="center" height={400}>
                   <Spinner />
@@ -194,3 +198,13 @@ function CreateArticle() {
 }
 
 export default CreateArticle
+
+// <div style={{backgroundColor: !canPost &&  ? '#FEF6F6' : null, padding: "20px",}}>
+// {!canPost ?
+//   <Pane background="redTint"style={paper} display="flex" alignItems="center" justifyContent="center" style={{height: '50px'}}>
+//     <div style={{color: "#BF0E08"}}> You must put some content in your article silly! </div>
+//   </Pane>
+//   :
+// //   null
+//     </div>
+// }

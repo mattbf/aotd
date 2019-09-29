@@ -94,6 +94,10 @@ function Login(props) {
     browserHistory.push(from.pathname)
   }
 
+  if (globalState.isAuth){
+    props.history.push("/"); //if already logged in go to home page
+  }
+
   return(
     <div style={center}>
       <Pane padding={15} background="tint1" display="flex" flexDirection="column" alignItems="center">
