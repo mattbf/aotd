@@ -43,7 +43,7 @@ function Article(props) {
   const apiUrl = process.env.NODE_ENV == "production" ? `/articles/${slug}`: `${baseUrl}/articles/${slug}`
 
   const windowSize = useWindowSize()
-  const isMobile = windowSize.width < 500 ? true : false
+  const isMobile = windowSize.width < 700 ? true : false
 
   console.log(apiUrl)
   const url = `http://localhost:4000/articles/${slug}` //http://localhost:4000
@@ -193,6 +193,7 @@ function Article(props) {
   return(
 
     <div>
+    <div> is Mobile? {isMobile.toString()} </div>
       <MetaTags>
         <title>AOTD | {articleTitle}</title>
         <meta name="description" content="Some description." />
@@ -209,8 +210,8 @@ function Article(props) {
       {fetch.isError ?
         //fetch.error.statuscode == 401 ?
         fetch.error.code == 401 ?
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginLeft: 'auto', marginRight: 'auto', minHeight: '400px'}}>
-          <Heading marginBottom={10} size={700}>"Oops.. Looks like you're not logged in!"</Heading>
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: !isMobile ? 'center' : 'flex-start', justifyContent: 'center', marginLeft: 'auto', marginRight: 'auto', minHeight: '400px', width: '75%'}}>
+          <Heading marginBottom={10} size={700}>Oops.. Looks like you are not logged in!</Heading>
           <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
             <Link to={'/login'}>
               <Heading size={500} marginRight={5}>Login</Heading>
@@ -224,7 +225,7 @@ function Article(props) {
           </div>
         </div>
         :
-        <div>Error: {fetch.error.error.message}</div>
+        <div style={{padding: '15px'}}>Error: {fetch.error.error.message}</div>
         :
         // <div>Error: {fetch.error.error.message}</div>
         // :

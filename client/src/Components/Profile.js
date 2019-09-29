@@ -7,6 +7,7 @@ import StatBox from './StatBox'
 import axios from 'axios'
 import MetaTags from 'react-meta-tags';
 import MetaImg from '../AOTD-metaimage.png'
+import useWindowSize from '../Utils/useWindowSize'
 
 import {
   Pane,
@@ -89,7 +90,8 @@ function Profile(props) {
   // console.log(user.username)
   const url = `${baseUrl}/user/${profileUser}`
 
-
+  const windowSize = useWindowSize()
+  const isMobile = windowSize.width < 700 ? true : false
 
   const [stats, setStats] = useState([])
   const [profile, setProfile] = useState({
@@ -212,7 +214,26 @@ function Profile(props) {
         </Pane>
         :
         fetch.isError ?
-          <div>Error: {fetch.error.message}</div>
+          fetch.error.code == 400 ?
+          <div style={{display: 'flex', flexDirection: 'column', alignItems: !isMobile ? 'center' : 'flex-start', justifyContent: 'center', marginLeft: 'auto', marginRight: 'auto', minHeight: '400px', width: '75%'}}>
+            <Heading marginBottom={10} size={700}>Oops.. Looks like you are not logged in!</Heading>
+            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
+              <Link to={'/login'}>
+                <Heading size={500} marginRight={5}>Login</Heading>
+              </Link>
+              <Heading size={500}>
+              to view
+              </Heading>
+              <Heading size={500} style={{color: '#2D80D4', marginLeft: '5px', marginRight: '5px'}}>
+                {profileUser}&apos;s
+              </Heading>
+              <Heading size={500}>
+               profile
+              </Heading>
+            </div>
+          </div>
+          :
+          <div style={{padding: '15px'}}>Error: {fetch.error.error.message}</div>
           :
           <div style={TopProfile}>
             <div style={ProfileBox}>
