@@ -40,7 +40,7 @@ router.route('/:slug').get(function(req, res) {
                 console.log(err + 'Could not find article');
                 res.status(400).send("Could not find article")
             } else {
-                //console.log("heres your article")
+                console.log("heres your article")
                 //console.log(article)
                 res.json(article);
             }

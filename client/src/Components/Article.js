@@ -48,7 +48,8 @@ function Article(props) {
   console.log(apiUrl)
   const url = `http://localhost:4000/articles/${slug}` //http://localhost:4000
   //const domain = process.env.APP_DOMAIN
-  const requrl = 'aotd.ca'//process.env.APP_DOMAIN || 'http://localhost:4000'
+
+  const requrl = 'aotd.ca/article'//process.env.APP_DOMAIN || 'http://localhost:4000'
   const copyUrl = `${requrl}/${slug}` || `http://localhost:4000/article/${slug}`
   //const id = props.id
   const [fetch, setFetch] = useState({
