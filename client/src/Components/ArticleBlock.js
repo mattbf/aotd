@@ -32,7 +32,7 @@ function ArticleBlock(props) {
             <div>
               <Link
                 to={{
-                  pathname: `/article/${slug}`,
+                  pathname: `/article/${props.article.slug}`,
                   state: {props},
                 }}
                 style={articleLink}

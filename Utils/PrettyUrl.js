@@ -1,5 +1,5 @@
 function PrettyUrl(title) {
-  var noSpace = title.split(' ').join('-')
-  var url = noSpace.replace('--', '')
+  var lowerNoSpace = title.toLowerCase().split(' ').join('-')
+  var url = lowerNoSpace.replace('--', '')
   return url
 }

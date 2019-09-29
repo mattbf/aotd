@@ -111,8 +111,9 @@ function CreateArticle() {
       	title: title,
       	author: user.username,
       	body: JSON.stringify(rawContentState),
-      	slug: title ? PrettyUrl(title) : ''
+      	slug: title ? encodeURIComponent(PrettyUrl(title)) : ''
       }
+
     })
       .then(response => {
         console.log(response)
@@ -122,6 +123,8 @@ function CreateArticle() {
           error: null
         })
         setIsSuccess(true)
+        console.log(title)
+        console.log(encodeURIComponent(PrettyUrl(title)))
       })
       .catch(function(error) {
         setFetch({
