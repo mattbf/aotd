@@ -12,13 +12,14 @@ const roles = {
 
 //Get All Articles
 router.route('/').get(function(req, res) {
-    Article.find(function(err, articles) {
+    const descSort = {'createdAt': +1}
+    Article.find().sort(descSort).exec(function(err, articles) {
         if (err) {
             console.log(err);
         } else {
             res.json(articles);
         }
-    });
+    })
 });
 //Get one Article
 router.route('/:slug').get(function(req, res) {
