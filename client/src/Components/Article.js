@@ -223,7 +223,23 @@ function Article(props) {
           </div>
         </div>
         :
-        <div style={{padding: '15px'}}>Error: {fetch.error.error.message}</div>
+        fetch.error.code == 400 ?
+          <div style={{display: 'flex', flexDirection: 'column', alignItems: !isMobile ? 'center' : 'flex-start', justifyContent: 'center', marginLeft: 'auto', marginRight: 'auto', minHeight: '400px', width: '75%'}}>
+            <Heading marginBottom={10} size={700}>That article don&apos;t exist partner</Heading>
+            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
+              <Heading size={500}>
+              Maybe you should
+              </Heading>
+              <Link to={'/login'}>
+                <Heading size={500} marginRight={5} marginLeft={5}>publish it</Heading>
+              </Link>
+              <Heading size={500}>
+                yourself
+              </Heading>
+            </div>
+          </div>
+        :
+        <div style={{padding: '15px'}}>Error: {fetch.error.error.message} {fetch.error.code}</div>
         :
         // <div>Error: {fetch.error.error.message}</div>
         // :

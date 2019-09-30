@@ -37,7 +37,7 @@ router.route('/:slug').get(function(req, res) {
           let slug = encodeURIComponent(req.params.slug);
           Article.findOne({ slug: slug }, function (err, article) {
             //console.log(slug)
-            if (err) {
+            if (err || !article) {
                 console.log(err + 'Could not find article');
                 res.status(400).send("Could not find article")
             } else {
