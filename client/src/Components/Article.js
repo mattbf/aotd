@@ -48,7 +48,7 @@ function Article(props) {
   console.log(apiUrl)
   const url = `http://localhost:4000/articles/${slug}` //http://localhost:4000
   //const domain = process.env.APP_DOMAIN
-  const requrl = 'aotd.ca/article'//process.env.APP_DOMAIN || 'http://localhost:4000'
+  const requrl = 'aotd.herokuapp.com/article'//process.env.APP_DOMAIN || 'http://localhost:4000'
   const copyUrl = `${requrl}/${articleTitle}` || `http://localhost:4000/article/${slug}`
   //const id = props.id
   const [fetch, setFetch] = useState({
@@ -223,7 +223,7 @@ function Article(props) {
           </div>
         </div>
         :
-        fetch.error.code == 400 ?
+        fetch.error.code == 404 ?
           <div style={{display: 'flex', flexDirection: 'column', alignItems: !isMobile ? 'center' : 'flex-start', justifyContent: 'center', marginLeft: 'auto', marginRight: 'auto', minHeight: '400px', width: '75%'}}>
             <Heading marginBottom={10} size={700}>That article don&apos;t exist partner</Heading>
             <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
