@@ -169,7 +169,7 @@ router.get('/:username', function (req, res, next) {
           return next(err);
         } else {
           User.find({username: profile}, function(err, userProfile) {
-            console.log(userProfile)
+            //console.log(userProfile)
             Article.find({author: profile}, function(err, authorArticles) {
                 if (err) {
                     console.log(err);
@@ -181,10 +181,19 @@ router.get('/:username', function (req, res, next) {
                   //   'articles': authorArticles
                   // })
                   if (userProfile[0]) {
-                    Article.find().count({'comments.author': profile}, function(err, comments) {
+                    Article.find({'comments.author': profile}, function(err, articleWithComments) {
                         if (err) {
                             console.log(err);
                         } else {
+                          //console.log(articleWithComments[0].comments)
+                          var count = 0
+                          articleWithComments.forEach(article => article.comments.forEach(comment => {
+                            if (comment.author == profile){
+                              count += 1
+                            }
+                          }))
+                          //console.log(count)
+                          //comments.forEach(comment => console.log(comment.author))
                           return res.json({
                             'profile': {
                               'username': userProfile[0].username,
@@ -194,10 +203,11 @@ router.get('/:username', function (req, res, next) {
                               'bio': userProfile[0].bio
                             },
                             'articles': authorArticles,
-                            'comments': comments
+                            'comments': count//comments.count()
                           })
                         }
                     })
+
                   } else {
                     var err = new Error("Couldn't find that user");
                     err.status = 404;
