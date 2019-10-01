@@ -181,7 +181,7 @@ router.get('/:username', function (req, res, next) {
                   //   'articles': authorArticles
                   // })
                   if (userProfile[0]) {
-                    Article.find().count({author: profile, 'comments.author': profile}, function(err, comments) {
+                    Article.find().count({'comments.author': profile}, function(err, comments) {
                         if (err) {
                             console.log(err);
                         } else {
