@@ -181,7 +181,7 @@ function Profile(props) {
             console.log(error);
 
         })
-  }, [refresh])
+  }, [refresh, profileUser])
 
   const isCurrentUser = profileUser === user.username ? true : false
   var dateoptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -189,7 +189,7 @@ function Profile(props) {
   return(
     <div>
       <MetaTags>
-        <title>AOTD | {user.username} </title>
+        <title>AOTD | {profileUser} </title>
         <meta name="description" content="Article of the day - Where curious minds discuss" />
         <meta property="og:image" content={MetaImg} />
       </MetaTags>
@@ -279,6 +279,7 @@ function Profile(props) {
                   </Text>
                 }
               </div>
+              {isCurrentUser ? <div> Draft Articles </div> : null }
             </div>
           </div>
       }
