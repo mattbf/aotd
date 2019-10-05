@@ -80,6 +80,7 @@ router.route('/delete/:slug').post(function(req, res) {
     }
   });
 });
+
 //delte and article by id
 router.route('/delete/id/:id').post(function(req, res) {
   let id = req.params.id;
