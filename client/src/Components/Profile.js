@@ -86,6 +86,7 @@ function Profile(props) {
   const [profile, setProfile] = useState({
     user: {},
     articles: [],
+    drafts: [],
     articleCount: '',
     commentsCount: ''
   })
@@ -149,6 +150,7 @@ function Profile(props) {
             setProfile({
               user: response.data.profile,
               articles: response.data.articles,
+              drafts: response.data.drafts,
               articleCount: response.data.articles.length,
               commentsCount: response.data.comments
             });
@@ -279,7 +281,16 @@ function Profile(props) {
                   </Text>
                 }
               </div>
-              {isCurrentUser ? <div> Draft Articles </div> : null }
+              {isCurrentUser ?
+                <div> Draft Articles
+                {profile.drafts.map((articleDraft, index) =>
+                  <div>Article draft title: {articleDraft.title}</div>
+                )}
+                </div>
+
+                :
+                 null
+              }
             </div>
           </div>
       }

@@ -180,6 +180,15 @@ router.get('/:username', function (req, res, next) {
                   // return res.json({
                   //   'articles': authorArticles
                   // })
+                  let draftArticles = authorArticles.filter(function(article) {
+                     return article.isDraft != false || null;
+                    //return article.author == "alldacomments"
+                  });
+                  let published = authorArticles.filter(function(article) {
+                     return article.isDraft == false || null;
+                    //return article.author == "alldacomments"
+                  });
+
                   if (userProfile[0]) {
                     Article.find({'comments.author': profile}, function(err, articleWithComments) {
                         if (err) {
@@ -202,7 +211,8 @@ router.get('/:username', function (req, res, next) {
                               'createdAt': userProfile[0].createdAt,
                               'bio': userProfile[0].bio
                             },
-                            'articles': authorArticles,
+                            'articles': published,
+                            'drafts': draftArticles,
                             'comments': count//comments.count()
                           })
                         }

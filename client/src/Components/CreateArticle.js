@@ -154,7 +154,7 @@ function CreateArticle() {
       	author: user.username,
       	body: JSON.stringify(rawContentState),
       	slug: title ? encodeURIComponent(PrettyUrl(title)) : '',
-        draft: true
+        isDraft: true
       }
 
     })
