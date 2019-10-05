@@ -26,6 +26,10 @@ let Article = new Schema({
     },
     slug: {
       type: String
-    }
+    },
+    isDraft: {
+      type: Boolean, default: false
+    },
+
 });
 module.exports = mongoose.model('Article', Article);

@@ -39,10 +39,11 @@ function Navbar(props) {
   const user = globalState.user
   const auth = globalState.isAuth
   const PublishArticle = props.publish
+  const SaveAsDraft = props.save
   const { match, location, history } = props
   const path = match.path
   const isArticle = path == '/article/:title' ? true : false
-  
+
   return (
     <div>
       <Pane display="flex" padding={16} background="#234361" borderRadius={3}>
@@ -50,6 +51,9 @@ function Navbar(props) {
           <Button is={Link} to="/" intent="danger" height={32} marginRight={16} iconBefore="cross">
             Cancel
           </Button>
+        </Pane>
+        <Pane>
+          <Button marginRight={10} disabled={!props.canPost} onClick={SaveAsDraft} appearance="primary" intent="success" >Save as draft</Button>
         </Pane>
         <Pane>
           <Button disabled={!props.canPost} onClick={PublishArticle} appearance="primary">Publish Article</Button>

@@ -139,11 +139,55 @@ function CreateArticle() {
 
       })
   }
+
+  function SaveAsDraft() {
+    setFetch({
+      isLoading: true,
+      isError: false,
+      error: null
+    })
+    axios({
+      method: 'post',
+      url: apiUrl,
+      data:{
+      	title: title,
+      	author: user.username,
+      	body: JSON.stringify(rawContentState),
+      	slug: title ? encodeURIComponent(PrettyUrl(title)) : '',
+        draft: true
+      }
+
+    })
+      .then(response => {
+        console.log(response)
+        setFetch({
+          isLoading: false,
+          isError: false,
+          error: null
+        })
+        setIsSuccess(true)
+        console.log(title)
+        console.log(encodeURIComponent(PrettyUrl(title)))
+      })
+      .catch(function(error) {
+        setFetch({
+          isLoading: false,
+          isError: true,
+          error: error,
+          status: canPost ? error.message.substring(error.message.length - 3, error.message.length) : 999 //body is emppy
+        })
+        console.log(error)
+        console.log(fetch.status)
+        console.log(fetch.status == 409)
+
+      })
+  }
+
   const isBody = true
 
   return(
     <div>
-      <CreateNav publish={Publish} canPost={canPost}/>
+      <CreateNav publish={Publish} save={SaveAsDraft} canPost={canPost}/>
       <div style={ {
         marginRight: 'auto',
         marginLeft: 'auto',

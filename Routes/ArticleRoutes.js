@@ -13,7 +13,7 @@ const roles = {
 //Get All Articles
 router.route('/').get(function(req, res) {
     const descSort = {'createdAt': +1}
-    Article.find().sort(descSort).exec(function(err, articles) {
+    Article.find({isDraft: false || null}).sort(descSort).exec(function(err, articles) { 
         if (err) {
             console.log(err);
         } else {
@@ -36,6 +36,35 @@ router.route('/:slug').get(function(req, res) {
         } else {
           let slug = encodeURIComponent(req.params.slug);
           Article.findOne({ slug: slug }, function (err, article) {
+            //console.log(slug)
+            if (err || !article) {
+                console.log(err + 'Could not find article');
+                res.status(404).send("Could not find article")
+            } else {
+                console.log("heres your article")
+                //console.log(article)
+                res.json(article);
+            }
+          })
+        }
+      }
+    });
+});
+//Get one Draft Article
+router.route('/draft/:slug').get(function(req, res) {
+  console.log("rquesting " + req.params.slug)
+  console.log(req.session.userId)
+
+  User.findById(req.session.userId) //('5d6b5c2b03f7d5532543ba90')
+    .exec(function (error, user) {
+      if (error) {
+        return res.status(400).send("Not logged in");
+      } else {
+        if (user === null) {
+          return res.status(401).send("Not authorized. UserSession: " + req.session);
+        } else {
+          let slug = encodeURIComponent(req.params.slug);
+          Article.findOne({ slug: slug, draft: true }, function (err, article) {
             //console.log(slug)
             if (err || !article) {
                 console.log(err + 'Could not find article');
