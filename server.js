@@ -22,13 +22,14 @@ const SESS_SECRET=process.env.SESS_SECRET || "localsessionsecret"
 console.log("is Prod: " + NODE_ENV === 'production')
 console.log("Domain: " + APP_DOMAIN)
 console.log("Session Name: " + SESS_NAME + " Lifetime: " + SESS_LIFETIME)
+console.log("apikey: " + process.env.SENDGRID_API_KEY)
 
 var articleRouter = require('./Routes/ArticleRoutes');
 var userRouter = require('./Routes/UserRoutes')
 var adminRouter = require('./Routes/AdminRoutes')
+var sendTestEmail = require('./Sendgrid/SendgridFunctions')
 
-
-
+//sendTestEmail.sendMessage()
 
 app.set('trust proxy', true)
 app.disable('x-powered-by');
@@ -107,6 +108,7 @@ app.use(session({
 app.use('/articles', articleRouter);
 app.use('/user', userRouter);
 app.use('/admin', adminRouter);
+
 
 
 //Connent backend to frontend
