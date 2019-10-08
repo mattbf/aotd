@@ -10,7 +10,7 @@ var MongoStore = require('connect-mongo')(session);
 //import { PORT, NODE_ENV, SESS_NAME, SESS_SECRET, SESS_LIFETIME } from './config'  //require('./config');
 //const serverConfig = require('./config')
 const dotenv = require('dotenv');
-require('dotenv').config();
+dotenv.config();
 //var PORT = serverConfig.PORT
 const APP_DOMAIN = process.env.APP_DOMAIN || 'http://localhost:4000'
 const PORT = process.env.PORT || 4000;
@@ -29,7 +29,7 @@ var userRouter = require('./Routes/UserRoutes')
 var adminRouter = require('./Routes/AdminRoutes')
 var sendTestEmail = require('./Sendgrid/SendgridFunctions')
 
-//sendTestEmail.sendMessage()
+sendTestEmail.sendMessage()
 
 app.set('trust proxy', true)
 app.disable('x-powered-by');
