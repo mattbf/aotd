@@ -187,7 +187,8 @@ router.route('/add').post(function(req, res) {
         let article = new Article(req.body);
         article.save()
             .then(article => {
-                sendgrid.sendNewArticle(article)
+              let aurl = `aotd.herokuapp.com/article/${slug}`
+                sendgrid.sendNewArticle(article, aurl)
                 res.status(200).json(
                   {
                     'article': 'article added successfully',

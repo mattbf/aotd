@@ -9,15 +9,32 @@ const msg = {
 };
 
 module.exports = {
-  sendNewArticle: function (article) {
+  sendNewArticle: function (article, url) {
     console.log("attempting to send a notification")
     sgMail.send({
       to: 'matthewbf8@gmail.com',
       from: 'articles@aotd.ca',
       subject: 'New Article: ' + article.title,
-      text: 'and easy to do anywhere, even with Node.js',
-      html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+      templateId: 'd-a67a600310864e66aea10b0f2e119201',
+      dynamic_template_data: {
+        article: {
+          author: article.author,
+          title: article.title,
+          url: url,
+          summary: "Test summary"
+        }
+      },
     });
     console.log("following msg was sent: " + msg)
   },
 };
+
+//
+// {
+//    "article":{
+//          "author":"Ben",
+//          "title":"Article Test Title",
+//          "url":"aotd.herokuapp.com/article/tiny-meat-gang-making-%24%24%24",
+//          "summary":"heres an example summary, hello "
+//    }
+// }
