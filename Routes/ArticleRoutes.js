@@ -187,7 +187,7 @@ router.route('/add').post(function(req, res) {
         let article = new Article(req.body);
         article.save()
             .then(article => {
-                //sendgrid.sendMessage()
+                sendgrid.sendNewArticle(article)
                 res.status(200).json(
                   {
                     'article': 'article added successfully',
