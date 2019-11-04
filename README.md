@@ -20,5 +20,8 @@ You can view the app at [www.aotd.ca](http://aotd.ca)
 
 ## Functionality
 
-* [x] Functionality 1
-* [ ] Functionality 2
+* [x] User authentication using sessions
+* [x] READ and WRITE articles
+* [ ] comment on articles
+* [ ] create draft articles
+* [ ] email notifications via sendgrid

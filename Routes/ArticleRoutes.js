@@ -2,6 +2,7 @@ var express  = require('express');
 var router = express.Router();
 let Article = require('../Models/article.model');
 var User = require('../Models/user.model');
+var sendTestEmail = require('../Sendgrid/SendgridFunctions')
 
 
 const roles = {
@@ -13,7 +14,7 @@ const roles = {
 //Get All Articles
 router.route('/').get(function(req, res) {
     const descSort = {'createdAt': +1}
-    Article.find({isDraft: false || null}).sort(descSort).exec(function(err, articles) { 
+    Article.find({isDraft: false || null}).sort(descSort).exec(function(err, articles) {
         if (err) {
             console.log(err);
         } else {
