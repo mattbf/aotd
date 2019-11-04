@@ -104,6 +104,24 @@ UserSchema.statics.adminauth = function (email, password, callback) {
 
 }
 
+//GET user emails
+UserSchema.statics.getEmails = function () {
+  User.find({}, function(err, users) {
+    if (users != null){
+      let userList =[]
+      users.map((user, index) => {
+        console.log(user.email)
+        userList.push(user.email)
+      })
+      return userList
+    } else {
+      var err = new Error('No users');
+      err.status = 400;
+      return next(err);
+    }
+  })
+}
+
 
 var User = mongoose.model('User', UserSchema);
 module.exports = User;

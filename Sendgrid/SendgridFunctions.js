@@ -9,10 +9,12 @@ const msg = {
 };
 
 module.exports = {
-  sendNewArticle: function (article, url) {
-    console.log("attempting to send a notification")
+  sendNewArticle: function (article, url, userList) {
+    console.log("aritcle: " + article.title)
+    console.log("url: " + url)
+    console.log("emails: " + userList)
     sgMail.send({
-      to: 'matthewbf8@gmail.com',
+      to: userList,
       from: 'articles@aotd.ca',
       subject: 'New Article: ' + article.title,
       templateId: 'd-a67a600310864e66aea10b0f2e119201',

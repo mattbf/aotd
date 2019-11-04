@@ -4,7 +4,6 @@ let Article = require('../Models/article.model');
 var User = require('../Models/user.model');
 var sendgrid = require('../Sendgrid/SendgridFunctions')
 
-
 const roles = {
     'user': { can: [] },
     'admin': { can: ['read', 'write'] },
@@ -174,6 +173,8 @@ router.route('/delete/id/:id').post(function(req, res) {
 //Post an Article
 router.route('/add').post(function(req, res) {
   let slug = encodeURIComponent(req.body.title)
+  let userList = User.getEmails()
+  console.log("getting user emails: " + userList)
   console.log("trying to create " + slug)
   Article.findOne({ slug: slug }, function (err, article) {
 
@@ -188,7 +189,7 @@ router.route('/add').post(function(req, res) {
         article.save()
             .then(article => {
               let aurl = `aotd.herokuapp.com/article/${slug}`
-                sendgrid.sendNewArticle(article, aurl)
+                sendgrid.sendNewArticle(article, aurl, userList)
                 res.status(200).json(
                   {
                     'article': 'article added successfully',
