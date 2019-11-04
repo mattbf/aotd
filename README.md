@@ -4,7 +4,7 @@ I built this app so I could discuss relevant events, articles, and topics of int
 
 ## Getting Started
 
-You can view the app at [www.aotd.ca](https://aotd.ca)
+You can view the app at [www.aotd.ca](http://aotd.ca)
 
 ### Prerequisites
 
