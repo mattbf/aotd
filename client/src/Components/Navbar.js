@@ -149,9 +149,9 @@ function Navbar(props) {
               <Link to='/' style={{marginRight: '12px', margin: '0px', textDecoration: 'none'}}>
                 <Heading size={700} style={lightText}>AOTD</Heading>
                 {isMobile ?
-                  <Heading size={200} style={lightText}>(beta)</Heading>
+                  <Heading size={200} style={lightText}></Heading>
                   :
-                  <Heading size={200} style={lightText}>Article Of The Day (beta)</Heading>
+                  <Heading size={200} style={lightText}>Article Of The Day</Heading>
                 }
               </Link>
             </div>

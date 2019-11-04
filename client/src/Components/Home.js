@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Feed from './Feed'
 import Navbar from './Navbar'
+import Footer from './Footer'
 import { Link } from "react-router-dom";
 import axios from 'axios'
 import useGlobal from '../GlobalState/Store/Store';
@@ -64,6 +65,7 @@ function Home() {
       </MetaTags>
       <Navbar user={user} auth={auth}/>
       <Feed/>
+      <Footer/>
     </div>
   )
 }

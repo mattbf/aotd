@@ -30,6 +30,9 @@ let Article = new Schema({
     isDraft: {
       type: Boolean, default: false
     },
+    isFeature: {
+      type: Boolean, default: false
+    },
 
 });
 module.exports = mongoose.model('Article', Article);
