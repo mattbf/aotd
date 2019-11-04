@@ -8,6 +8,7 @@ import axios from 'axios'
 import MetaTags from 'react-meta-tags';
 import MetaImg from '../AOTD-metaimage.png'
 import useWindowSize from '../Utils/useWindowSize'
+import ArticleBlock from './ArticleBlock'
 
 import {
   Pane,
@@ -284,7 +285,7 @@ function Profile(props) {
               {isCurrentUser ?
                 <div> Draft Articles
                 {profile.drafts.map((articleDraft, index) =>
-                  <div>Article draft title: {articleDraft.title}</div>
+                  <ArticleBlock key={articleDraft._id} article={articleDraft} index={index + 1} number={null}/>
                 )}
                 </div>
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Pane, Button, Text, Heading, Icon, Pill } from 'evergreen-ui'
+import { Pane, Button, Text, Heading, Icon, Pill, Badge } from 'evergreen-ui'
 import {Link} from 'react-router-dom'
 import { timeDifferenceForDate } from '../Utils/TimeDif.js';
 import { PrettyUrl } from '../Utils/PrettyUrl.js';
@@ -20,15 +20,20 @@ function ArticleBlock(props) {
   //var url = props.article.title.split(' ').join('-')
   const slug = PrettyUrl(props.article.title)
   var timeago = timeDifferenceForDate(props.article.createdAt)
+  var isDraft = props.article.isDraft
 
   var authorLink = `/author/${props.article.author}`
   const commentsCount = props.article.comments.length
   return(
       <Pane display="flex" padding={16} background="#FFFFFF" borderRadius={3} margin={10} position='relative'>
         <div style={{display: 'flex', flexDirection: 'row',}}>
+          {isDraft?
+            <Badge color="green" isSolid marginRight={8}>DRAFT</Badge>
+            :
             <div>
               <Pill display="inline-flex" color="blue" marginTop={5} marginRight={8}>{props.number}</Pill>
             </div>
+          }
             <div>
               <Link
                 to={{
