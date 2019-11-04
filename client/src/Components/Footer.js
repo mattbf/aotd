@@ -74,8 +74,10 @@ function Footer(props) {
       <Pane display="flex" padding={16} background="#EBEDF0" borderRadius={3}>
         <Pane flex={1} alignItems="center" display="flex" justifyContent="center" flexDirection="column">
           <div style={{alignItems:"center", display:"flex",justifyContent:"center",flexDirection:"row", marginBottom: '25px'}}>
-            <Badge color="blue" isSolid marginRight={8}>New!</Badge>
-            <Heading size={200} style={darkText}>Email notifications will now be sent when new articles are posted!</Heading>
+            <Link to='/features' style={{marginRight: '12px', margin: '0px', textDecoration: 'none', display:"flex",justifyContent:"center",flexDirection:"row",}}>
+              <Badge color="blue" isSolid marginRight={8}>New!</Badge>
+              <Heading size={200} style={darkText}>Email notifications will now be sent when new articles are posted!</Heading>
+            </Link>
           </div>
           <Heading size={200} style={darkText}>Built by <a styel={aLink} href={"mailto:matthewbf8@gmail.com"}>Matthew Behan-Fossey</a></Heading>
           <div style={{alignItems:"center", display:"flex",justifyContent:"center",flexDirection:"row", marginTop: '10px'}}>

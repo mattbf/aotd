@@ -281,16 +281,7 @@ function Profile(props) {
                   </Text>
                 }
               </div>
-              {isCurrentUser ?
-                <div> Draft Articles
-                {profile.drafts.map((articleDraft, index) =>
-                  <div>Article draft title: {articleDraft.title}</div>
-                )}
-                </div>
 
-                :
-                 null
-              }
             </div>
           </div>
       }
@@ -301,3 +292,15 @@ function Profile(props) {
 }
 
 export default Profile
+
+//drafts list
+// {isCurrentUser ?
+//   <div> Draft Articles
+//   {profile.drafts.map((articleDraft, index) =>
+//     <div>Article draft title: {articleDraft.title}</div>
+//   )}
+//   </div>
+//
+//   :
+//    null
+// }

@@ -13,6 +13,7 @@ import Todo from './Components/Todo'
 import Admin from './Components/Admin/Admin'
 import useGlobal from './GlobalState/Store/Store';
 import axios from 'axios'
+import FeaturesPage from './Components/FeaturesPage'
 //axios.defaults.withCredentials = true;
 
 
@@ -108,6 +109,7 @@ const exampleuserobj = {
           <Route path="/author/:username" component={Profile}/>
           <Route path="/article/:title" component={Article}/>
           <PrivateRoute path="/new" component={CreateArticle}/>
+          <Route path="/features" component={FeaturesPage}/>
           <Route path="/admin" component={Admin}/>
         </div>
         <div style={centerBlockBlank}>

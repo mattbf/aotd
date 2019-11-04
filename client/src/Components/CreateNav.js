@@ -53,9 +53,6 @@ function Navbar(props) {
           </Button>
         </Pane>
         <Pane>
-          <Button marginRight={10} disabled={!props.canPost} onClick={SaveAsDraft} appearance="primary" intent="success" >Save as draft</Button>
-        </Pane>
-        <Pane>
           <Button disabled={!props.canPost} onClick={PublishArticle} appearance="primary">Publish Article</Button>
         </Pane>
       </Pane>
@@ -64,3 +61,8 @@ function Navbar(props) {
 }
 
 export default withRouter(Navbar)
+
+// drafts Button
+// <Pane>
+//   <Button marginRight={10} disabled={!props.canPost} onClick={SaveAsDraft} appearance="primary" intent="success" >Save as draft</Button>
+// </Pane>

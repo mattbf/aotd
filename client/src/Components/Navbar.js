@@ -109,6 +109,7 @@ function Navbar(props) {
   const { match, location, history } = props
   const path = match.path
   const isArticle = path == 'http://localhost:4000/article/:title' ? true : false
+  const isFeatures = path == 'http://localhost:4000/features' ? true : false
 
   const browserHistory = props.history
   function LogoutUser() {
@@ -155,7 +156,6 @@ function Navbar(props) {
                 }
               </Link>
             </div>
-
           </Pane>
         }
         </Pane>
