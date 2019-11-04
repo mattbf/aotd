@@ -8,7 +8,7 @@ You can view the app at [www.aotd.ca](https://aotd.ca)
 
 ### Prerequisites
 
-You can only view the articles if your are authenticated (have an account) but I have laid it its functionality below.
+//You can only view the articles if your are authenticated (have an account) but I have laid out the apps functionality below.
 
 ## Built With
 
@@ -17,3 +17,8 @@ You can only view the articles if your are authenticated (have an account) but I
 * [MongoDB](https://www.mongodb.com/) - Database used
 * [Sendgrid](https://sendgrid.com/) - For sending email updates
 * [Heroku](https://www.heroku.com/) - Project hosting
+
+## Functionality
+
+* [x] Functionality 1
+* [ ] Functionality 2
