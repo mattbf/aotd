@@ -106,20 +106,25 @@ UserSchema.statics.adminauth = function (email, password, callback) {
 
 //GET user emails
 UserSchema.statics.getEmails = function () {
+  console.log("EMAILS REQ MADE")
+  let userList =[]
   User.find({}, function(err, users) {
     if (users != null){
-      let userList =[]
       users.map((user, index) => {
-        console.log(user.email)
+        console.log("found user " + user.email)
         userList.push(user.email)
       })
-      return userList
+      if (userList.length != 0){
+        console.log("final emails list: " + userList)
+      }
+      console.log("empty user list")
     } else {
       var err = new Error('No users');
       err.status = 400;
       return next(err);
     }
   })
+  return userList
 }
 
 

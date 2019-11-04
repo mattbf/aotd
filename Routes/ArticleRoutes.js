@@ -174,7 +174,7 @@ router.route('/delete/id/:id').post(function(req, res) {
 router.route('/add').post(function(req, res) {
   let slug = encodeURIComponent(req.body.title)
   let userList = User.getEmails()
-  console.log("getting user emails: " + userList)
+  console.log("str8 function call: " + User.getEmails)
   console.log("trying to create " + slug)
   Article.findOne({ slug: slug }, function (err, article) {
 

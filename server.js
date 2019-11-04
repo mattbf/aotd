@@ -34,9 +34,9 @@ var sendTestEmail = require('./Sendgrid/SendgridFunctions')
 // var createAdmin = require('./seed');
 
 //test egt enmails
-var User = require('./Models/user.model');
-let userList = User.getEmails()
-console.log("user list: " + userList)
+// var User = require('./Models/user.model');
+// let userList = User.getEmails()
+// console.log("user list: " + userList)
 
 app.set('trust proxy', true)
 app.disable('x-powered-by');
