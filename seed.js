@@ -2,7 +2,7 @@
 //
 // var user = {
 //     email: "adminuser@gmail.com",
-//     username: "Admin",
+//     username: "SuperAdmin",
 //     password: 'admin123',
 //     role: "admin"
 // }

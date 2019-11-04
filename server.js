@@ -29,7 +29,10 @@ var userRouter = require('./Routes/UserRoutes')
 var adminRouter = require('./Routes/AdminRoutes')
 var sendTestEmail = require('./Sendgrid/SendgridFunctions')
 
-//sendTestEmail.sendMessage()
+// //sendTestEmail.sendMessage()
+// //Create admin user
+// var createAdmin = require('./seed');
+
 
 app.set('trust proxy', true)
 app.disable('x-powered-by');
