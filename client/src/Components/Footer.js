@@ -79,9 +79,9 @@ function Footer(props) {
               <Heading size={200} style={darkText}>Email notifications will now be sent when new articles are posted!</Heading>
             </Link>
           </div>
-          <Heading size={200} style={darkText}>Built by <a styel={aLink} href={"mailto:matthewbf8@gmail.com"}>Matthew Behan-Fossey</a></Heading>
+          <Heading size={200} style={darkText}>Built by <a style={aLink} href={"mailto:matthewbf8@gmail.com"}>Matthew Behan-Fossey</a></Heading>
           <div style={{alignItems:"center", display:"flex",justifyContent:"center",flexDirection:"row", marginTop: '10px'}}>
-            <a styel={aLink} href={"mailto:matthewbf8@gmail.com"}>
+            <a href={"https://github.com/mattbf/aotd"} target="_blank">
               <img style={footerIcon} className="img-responsive" src={GithubIcon} alt="aotdgithublink"/>
             </a>
           </div>
