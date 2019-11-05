@@ -23,7 +23,6 @@ module.exports = {
           author: article.author,
           title: article.title,
           url: url,
-          summary: "Test summary",
           cta: "Read Article"
         }
       },
@@ -35,13 +34,12 @@ module.exports = {
       to: authorEmail,
       from: 'articles@aotd.ca',
       subject: whoCommented + ' commented on your article ' + article.title,
-      templateId: 'd-a67a600310864e66aea10b0f2e119201',
+      templateId: 'd-e95095aa24c74833bed79975da13099f',
       dynamic_template_data: {
         article: {
           author: article.author,
           title: article.title,
           url: url,
-          summary: "Test summary",
           whoCommented: whoCommented,
           cta: "Read Comments"
         }
