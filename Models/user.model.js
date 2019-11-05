@@ -105,25 +105,48 @@ UserSchema.statics.adminauth = function (email, password, callback) {
 }
 
 //GET user emails
-UserSchema.statics.getEmails = function () {
-  console.log("EMAILS REQ MADE")
+UserSchema.statics.getEmails = function (author) {
+  var isAuthor = author ? "true" : "false"
+  console.log("EMAILS REQ MADE with author=" + isAuthor + " author: " + author)
   let userList =[]
-  User.find({}, function(err, users) {
-    if (users != null){
-      users.map((user, index) => {
-        console.log("found user " + user.email)
-        userList.push(user.email)
-      })
-      if (userList.length != 0){
-        console.log("final emails list: " + userList)
+  if(author){
+    console.log("author was provided")
+    User.find({ username: author }, function(err, user) {
+      if (user != null){
+        user.map((user, index) => {
+          console.log("found user " + user.email)
+          userList.push(user.email)
+        })
+          if (userList.length != 0){
+            console.log("final emails list: " + userList)
+          }
+        console.log("empty user list")
+      } else {
+        var err = new Error('No users');
+        err.status = 400;
+        return next(err);
       }
-      console.log("empty user list")
-    } else {
-      var err = new Error('No users');
-      err.status = 400;
-      return next(err);
-    }
-  })
+    })
+  } else{
+    console.log("author was not provided")
+    User.find({}, function(err, users) {
+      if (users != null){
+        users.map((user, index) => {
+          console.log("found user " + user.email)
+          userList.push(user.email)
+        })
+        if (userList.length != 0){
+          console.log("final emails list: " + userList)
+        }
+        console.log("empty user list")
+      } else {
+        var err = new Error('No users');
+        err.status = 400;
+        return next(err);
+      }
+    })
+  }
+
   return userList
 }
 

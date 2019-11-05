@@ -23,7 +23,27 @@ module.exports = {
           author: article.author,
           title: article.title,
           url: url,
-          summary: "Test summary"
+          summary: "Test summary",
+          cta: "Read Article"
+        }
+      },
+    });
+    console.log("following msg was sent: " + msg)
+  },
+  sendCommentUpdate: function (authorEmail, article, url, whoCommented) {
+    sgMail.send({
+      to: authorEmail,
+      from: 'articles@aotd.ca',
+      subject: whoCommented + ' commented on your article ' + article.title,
+      templateId: 'd-a67a600310864e66aea10b0f2e119201',
+      dynamic_template_data: {
+        article: {
+          author: article.author,
+          title: article.title,
+          url: url,
+          summary: "Test summary",
+          whoCommented: whoCommented,
+          cta: "Read Comments"
         }
       },
     });

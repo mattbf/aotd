@@ -174,8 +174,8 @@ router.route('/delete/id/:id').post(function(req, res) {
 router.route('/add').post(function(req, res) {
   let slug = encodeURIComponent(req.body.title)
   let userList = User.getEmails()
-  console.log("str8 function call: " + User.getEmails)
-  console.log("trying to create " + slug)
+  // console.log("str8 function call: " + User.getEmails)
+  // console.log("trying to create " + slug)
   Article.findOne({ slug: slug }, function (err, article) {
 
     if (article) {
@@ -186,6 +186,7 @@ router.route('/add').post(function(req, res) {
 
         console.log("no article with that title found")
         let article = new Article(req.body);
+        console.log(article)
         article.save()
             .then(article => {
               let aurl = `aotd.herokuapp.com/article/${slug}`
@@ -210,14 +211,25 @@ router.route('/add').post(function(req, res) {
 //Add comments to an article
 router.route('/:slug/comments').post(function(req, res) {
     let slug = encodeURIComponent(req.params.slug);
+    let aurl = `aotd.herokuapp.com/article/${slug}`
+    let id = req.params.id;
+    User.findById(req.session.userId, function (error, user) {
+      if (error || !user) {
+        res.status(400).send('Not logged in');
+      } else {
+        let whoCommented = user.username
+      }
+    })
     //console.log("comments atempt")
-    console.log(slug)
+    //console.log(slug)
     if (req.body.body) {
       Article.findOne({ slug: slug }, function (err, article) {
           if (!article)
               res.status(404).send("Article not found");
           else
               article.comments.push(req.body)
+              var authorEmail = User.getEmails(article.author)
+              SendGrid.sendCommentUpdate(authorEmail, article, aurl, whoCommented)
               article.save().then(article => {
                   res.json('Comments added to ' + article.title);
               })
