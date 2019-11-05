@@ -4,7 +4,8 @@ import axios from 'axios'
 import {
   Heading,
   Pane,
-  Spinner
+  Spinner,
+  Button
 } from 'evergreen-ui'
 
 
@@ -13,6 +14,8 @@ function Feed() {
   const baseUrl = 'http://localhost:4000'
   const apiUrl = process.env.NODE_ENV == "production" ? `/articles`: `${baseUrl}/articles`
   const [feed, setFeed] = useState([])
+  const [limit, setLimit] = useState(5)
+  const [isMore, setIsMore] = useState(true)
   const articleCount = feed.length
   const [fetch, setFetch] = useState({
     isLoading: false,
@@ -46,6 +49,19 @@ function Feed() {
         })
   }, [])
 
+  useEffect(() => {
+    if (feed.length > limit){
+      setIsMore(true)
+    }
+    if (limit <= feed.length){
+      setIsMore(false)
+    }
+  }, [feed, limit])
+
+  function LoadMore(){
+    setLimit(limit + 5)
+  }
+
   return (
     <div>
       {fetch.isLoading ?
@@ -64,10 +80,15 @@ function Feed() {
           </div>
           :
           <div>
-            {feed.slice(0).reverse().map((article, index) =>
+            {feed.slice(0).reverse().slice(0,limit).map((article, index) =>
               <ArticleBlock key={article._id} article={article} index={index + 1} number={articleCount - index}/>
             )}
+            isMore ?
+              <Button marginRight={12} height={24} onClick={LoadMore}>Load more</Button>
+              :
+              null
           </div>
+
       }
 
 
