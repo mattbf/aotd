@@ -15,7 +15,7 @@ function Feed() {
   const apiUrl = process.env.NODE_ENV == "production" ? `/articles`: `${baseUrl}/articles`
   const [feed, setFeed] = useState([])
   const [limit, setLimit] = useState(5)
-  const [isMore, setIsMore] = useState(true)
+  const [isMore, setIsMore] = useState(false)
   const articleCount = feed.length
   const [fetch, setFetch] = useState({
     isLoading: false,
@@ -86,7 +86,7 @@ function Feed() {
           </div>
       }
       {isMore ?
-        <Button marginRight={12} height={24} onClick={LoadMore}>Load more</Button>
+        <Button style={{display: "block", marginLeft: "auto", marginRight: "auto", marginBottom: '15px', marginTop: '15px'}} height={24} onClick={LoadMore}>Load more</Button>
         :
         null
       }

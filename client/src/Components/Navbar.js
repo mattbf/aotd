@@ -163,8 +163,11 @@ function Navbar(props) {
 
            {auth ?
              <div style={{display: 'flex'}}>
-                <Button is={Link} iconBefore="plus" to="/new" appearance="primary">New Article</Button>
-               <UserMenu user={user} logout={LogoutUser} isMobile={isMobile}/>
+              {isMobile ?
+              <Button is={Link} style={{color: "#FFFFFF", textColor: "#FFFFFF"}} icon="plus" to="/new" appearance="primary">New</Button>
+              :
+              <Button is={Link} iconBefore="plus" to="/new" appearance="primary">New Article</Button>}
+              <UserMenu user={user} logout={LogoutUser} isMobile={isMobile}/>
               </div>
             :
             <div>
