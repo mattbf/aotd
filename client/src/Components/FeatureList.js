@@ -19,6 +19,12 @@ function FeatureList() {
       releaseDate: new Date(2019, 11, 4),
       description: "Email notifications will now be sent to users when a new article is posted. Authors will also be notified when someone comments on their article"
     },
+    {
+      title: "Beta Release",
+      feature: "Beta",
+      releaseDate: new Date(2019, 9, 1),
+      description: "Introducing AOTD: View, publish, and comment on articles."
+    },
   ])
 
   return (

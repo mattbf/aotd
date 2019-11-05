@@ -137,8 +137,9 @@ UserSchema.statics.getEmails = function (author) {
         })
         if (userList.length != 0){
           console.log("final emails list: " + userList)
+        } else {
+          console.log("empty user list")
         }
-        console.log("empty user list")
       } else {
         var err = new Error('No users');
         err.status = 400;

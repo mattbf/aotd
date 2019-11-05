@@ -30,6 +30,11 @@ module.exports = {
     console.log("following msg was sent: " + msg)
   },
   sendCommentUpdate: function (authorEmail, article, url, whoCommented) {
+    console.log("attempting to send msg ")
+    console.log("aritcle: " + article.title)
+    console.log("url: " + url)
+    console.log("emails: " + authorEmail)
+    console.log("who commented: " + whoCommented)
     sgMail.send({
       to: authorEmail,
       from: 'articles@aotd.ca',
@@ -45,7 +50,7 @@ module.exports = {
         }
       },
     });
-    console.log("following msg was sent: " + msg)
+
   },
 };
 

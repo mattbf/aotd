@@ -213,23 +213,27 @@ router.route('/:slug/comments').post(function(req, res) {
     let slug = encodeURIComponent(req.params.slug);
     let aurl = `aotd.herokuapp.com/article/${slug}`
     let id = req.params.id;
+    let whoCommented = "No User"
     User.findById(req.session.userId, function (error, user) {
       if (error || !user) {
         res.status(400).send('Not logged in');
       } else {
-        let whoCommented = user.username
+        whoCommented = user.username
       }
     })
     //console.log("comments atempt")
     //console.log(slug)
     if (req.body.body) {
       Article.findOne({ slug: slug }, function (err, article) {
+          let authorEmail = User.getEmails(article.author)
           if (!article)
               res.status(404).send("Article not found");
           else
               article.comments.push(req.body)
-              var authorEmail = User.getEmails(article.author)
-              SendGrid.sendCommentUpdate(authorEmail, article, aurl, whoCommented)
+              console.log("Did we get email: " + authorEmail)
+              if (authorEmail != null){
+                sendgrid.sendCommentUpdate(authorEmail, article, aurl, whoCommented)
+              }
               article.save().then(article => {
                   res.json('Comments added to ' + article.title);
               })
