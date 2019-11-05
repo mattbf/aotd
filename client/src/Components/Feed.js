@@ -53,7 +53,7 @@ function Feed() {
     if (feed.length > limit){
       setIsMore(true)
     }
-    if (limit <= feed.length){
+    if (limit >= feed.length){
       setIsMore(false)
     }
   }, [feed, limit])
@@ -83,15 +83,13 @@ function Feed() {
             {feed.slice(0).reverse().slice(0,limit).map((article, index) =>
               <ArticleBlock key={article._id} article={article} index={index + 1} number={articleCount - index}/>
             )}
-            isMore ?
-              <Button marginRight={12} height={24} onClick={LoadMore}>Load more</Button>
-              :
-              null
           </div>
-
       }
-
-
+      {isMore ?
+        <Button marginRight={12} height={24} onClick={LoadMore}>Load more</Button>
+        :
+        null
+      }
     </div>
   )
 }
