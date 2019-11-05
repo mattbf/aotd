@@ -189,7 +189,7 @@ router.route('/add').post(function(req, res) {
         console.log(article)
         article.save()
             .then(article => {
-              let aurl = `aotd.herokuapp.com/article/${slug}`
+              let aurl = `https://aotd.herokuapp.com/article/${slug}`
                 sendgrid.sendNewArticle(article, aurl, userList)
                 res.status(200).json(
                   {
@@ -211,7 +211,7 @@ router.route('/add').post(function(req, res) {
 //Add comments to an article
 router.route('/:slug/comments').post(function(req, res) {
     let slug = encodeURIComponent(req.params.slug);
-    let aurl = `aotd.herokuapp.com/article/${slug}`
+    let aurl = `https://aotd.herokuapp.com/article/${slug}`
     let id = req.params.id;
     let whoCommented = "No User"
     User.findById(req.session.userId, function (error, user) {
