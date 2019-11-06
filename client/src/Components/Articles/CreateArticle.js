@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from "react-router-dom";
 import { HashLink as SectionLink } from 'react-router-hash-link';
-import Navbar from './Navbar'
-import Comments from './Comments'
+import Navbar from '../PageComponents/Navbar'
+import Comments from './Comments/Comments'
 import ArticleEditor from './ArticleEditor.js';
-import { timeDifferenceForDate } from '../Utils/TimeDif.js';
-import CreateNav from './CreateNav.js';
+import { timeDifferenceForDate } from '../../Utils/TimeDif.js';
+import CreateNav from '../PageComponents/CreateNav.js';
 import { Route, Redirect } from 'react-router'
-import {PrettyUrl} from '../Utils/PrettyUrl'
+import {PrettyUrl} from '../../Utils/PrettyUrl'
 import axios from 'axios'
-import useGlobal from '../GlobalState/Store/Store';
-import useWindowSize from '../Utils/useWindowSize'
+import useGlobal from '../../GlobalState/Store/Store';
+import useWindowSize from '../../Utils/useWindowSize'
 
 import { EditorState, convertToRaw } from 'draft-js';
 

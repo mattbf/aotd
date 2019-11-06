@@ -1,35 +1,34 @@
-import React, { useEffect } from 'react';
-import { EditorState, ContentState, convertFromRaw, convertToRaw } from "draft-js";
+import React, { Component } from 'react';
+import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import { draftToHtml } from 'draftjs-to-html';
 import { htmlToDraft } from 'html-to-draftjs';
-import '../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 
-function CommentViewer(props) {
-  const content = props.comment.body
-  //console.log(content)
-  const [editorState, setEditorState] = React.useState(
-    EditorState.createWithContent(convertFromRaw(JSON.parse(content)))
-    //EditorState.createEmpty()
-  );
+function ArticleViewer(props) {
+  const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Initialized from content state.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     editorState: EditorState.createEmpty(),
+  //   };
+  // }
 
-  const onChangeEditor = (editorState) => {
-    setEditorState(editorState)
-  }
-
-  useEffect(() => {
-    //console.log('loaded')
-    setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(content))))
-  }, [])
-
+  // onEditorStateChange: Function = (editorState) => {
+  //   this.setState({
+  //     editorState,
+  //   });
+  // }
+  // console.log(props.initialContent)
+  // console.log(content)
     return (
       <div>
       <Editor
-        editorState={editorState}
+        editorState={props.editorState}
         wrapperClassName="demo-wrapper"
         editorClassName="demo-editor"
-        onEditorStateChange={onChangeEditor}
+        onEditorStateChange={props.onChange}
         readOnly={true}
         toolbarHidden={true}
         //contentState={props.initialState}
@@ -39,7 +38,7 @@ function CommentViewer(props) {
     )
 }
 
-export default CommentViewer
+export default ArticleViewer
 
 
 // import React, { Component } from 'react';

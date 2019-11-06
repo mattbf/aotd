@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import useGlobal from '../GlobalState/Store/Store';
+import useGlobal from '../../GlobalState/Store/Store';
 import axios from 'axios'
 import { Link } from "react-router-dom";
 import { HashLink as SectionLink } from 'react-router-hash-link';
-import Navbar from './Navbar'
-import Comments from './Comments'
-import { timeDifferenceForDate } from '../Utils/TimeDif.js';
-import { PrettyUrl } from '../Utils/PrettyUrl.js';
-import useWindowSize from '../Utils/useWindowSize'
+import Navbar from '../PageComponents/Navbar'
+import Comments from './Comments/Comments'
+import { timeDifferenceForDate } from '../../Utils/TimeDif.js';
+import { PrettyUrl } from '../../Utils/PrettyUrl.js';
+import useWindowSize from '../../Utils/useWindowSize'
 import { convertFromHTML, convertToHTML } from "draft-convert"
 
 import ArticleViewer from './ArticleViewer.js';
-import CommentPost from './CommentPost.js';
+import CommentPost from './Comments/CommentPost.js';
 import htmlToDraft from 'html-to-draftjs';
 
 import { EditorState, ContentState, convertFromRaw, convertToRaw } from "draft-js";
@@ -28,7 +28,7 @@ import {
 
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import MetaTags from 'react-meta-tags';
-import MetaImg from '../AOTD-metaimage.png'
+import MetaImg from '../../AOTD-metaimage.png'
 
 //const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Initialized from content state.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
 

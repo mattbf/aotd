@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import Feed from './Feed'
-import Navbar from './Navbar'
-import Footer from './Footer'
+import Feed from '../Feed'
+import Navbar from '../PageComponents/Navbar'
+import Footer from '../PageComponents/Footer'
 import { Link } from "react-router-dom";
 import axios from 'axios'
-import useGlobal from '../GlobalState/Store/Store';
+import useGlobal from '../../GlobalState/Store/Store';
 import {
   Pane,
   Button,
@@ -16,7 +16,7 @@ import {
 
 //axios.defaults.crossdomain = true;
 import MetaTags from 'react-meta-tags';
-import MetaImg from '../AOTD-metaimage.png'
+import MetaImg from '../../AOTD-metaimage.png'
 import FeatureList from './FeatureList'
 
 

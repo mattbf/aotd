@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import useGlobal from '../GlobalState/Store/Store';
 import { Link } from "react-router-dom";
 import { HashLink as SectionLink } from 'react-router-hash-link';
-import Navbar from './Navbar'
+import Navbar from './PageComponents/Navbar'
 import StatBox from './StatBox'
 import axios from 'axios'
 import MetaTags from 'react-meta-tags';

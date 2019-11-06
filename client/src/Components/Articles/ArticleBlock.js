@@ -1,8 +1,8 @@
 import React from 'react'
 import { Pane, Button, Text, Heading, Icon, Pill } from 'evergreen-ui'
 import {Link} from 'react-router-dom'
-import { timeDifferenceForDate } from '../Utils/TimeDif.js';
-import { PrettyUrl } from '../Utils/PrettyUrl.js';
+import { timeDifferenceForDate } from '../../Utils/TimeDif.js';
+import { PrettyUrl } from '../../Utils/PrettyUrl.js';
 import { HashLink as SectionLink } from 'react-router-hash-link';
 
 // position: 'absolute',

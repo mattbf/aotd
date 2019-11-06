@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import ArticleBlock from './ArticleBlock'
+import ArticleBlock from './Articles/ArticleBlock'
 import axios from 'axios'
 import {
   Heading,

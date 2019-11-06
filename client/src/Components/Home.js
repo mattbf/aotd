@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Feed from './Feed'
-import Navbar from './Navbar'
-import Footer from './Footer'
+import Navbar from './PageComponents/Navbar'
+import Footer from './PageComponents/Footer'
 import { Link } from "react-router-dom";
 import axios from 'axios'
 import useGlobal from '../GlobalState/Store/Store';

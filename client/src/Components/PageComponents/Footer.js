@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import { Link, withRouter } from "react-router-dom";
 import axios from 'axios'
-import useGlobal from '../GlobalState/Store/Store';
+import useGlobal from '../../GlobalState/Store/Store';
 import MediaQuery from 'react-responsive';
-import useWindowSize from '../Utils/useWindowSize'
-import GithubIcon from '../GitHub-Mark-64px.png'
+import useWindowSize from '../../Utils/useWindowSize'
+import GithubIcon from '../../GitHub-Mark-64px.png'
 import {
   Pane,
   Button,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { HashLink as SectionLink } from 'react-router-hash-link';
-import Navbar from './Navbar'
+import Navbar from './PageComponents/Navbar'
 
 import {
   Pane,

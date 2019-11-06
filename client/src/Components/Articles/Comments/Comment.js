@@ -1,7 +1,7 @@
 import React from 'react'
 import { Pane, Button, Text, Heading, Icon, Avatar } from 'evergreen-ui'
 import {Link} from 'react-router-dom'
-import { timeDifferenceForDate } from '../Utils/TimeDif.js';
+import { timeDifferenceForDate } from '../../../Utils/TimeDif.js';
 import CommentViewer from './CommentViewer'
 
 const commentWrapper = {
