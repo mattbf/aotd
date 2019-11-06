@@ -79,6 +79,86 @@ router.route('/draft/:slug').get(function(req, res) {
       }
     });
 });
+
+//Post an Article
+router.route('/add').post(function(req, res) {
+  let slug = encodeURIComponent(req.body.title)
+  let userList = User.getEmails()
+  // console.log("str8 function call: " + User.getEmails)
+  // console.log("trying to create " + slug)
+  Article.findOne({ slug: slug }, function (err, article) {
+
+    if (article) {
+      console.log("error, aritcle exists")
+      res.status(409).send("Article name already exists")
+    } else {
+        //console.log(err + 'Could not find article');
+
+        console.log("no article with that title found")
+        let article = new Article(req.body);
+        console.log(article)
+        article.save()
+            .then(article => {
+              let aurl = `https://aotd.herokuapp.com/article/${slug}`
+                sendgrid.sendNewArticle(article, aurl, userList)
+                res.status(200).json(
+                  {
+                    'article': 'article added successfully',
+                    'body': article
+                });
+            })
+            .catch(err => {
+                res.status(400).json(err);
+                console.log(err)
+                console.log("received request: ")
+                console.log(req.body)
+                //console.log(article)
+            });
+    }
+  })
+
+});
+//Add comments to an article
+router.route('/:slug/comments').post(function(req, res) {
+    let slug = encodeURIComponent(req.params.slug);
+    let aurl = `https://aotd.herokuapp.com/article/${slug}`
+    let id = req.params.id;
+    let whoCommented = "No User"
+    User.findById(req.session.userId, function (error, user) {
+      if (error || !user) {
+        res.status(400).send('Not logged in');
+      } else {
+        whoCommented = user.username
+      }
+    })
+    //console.log("comments atempt")
+    //console.log(slug)
+    if (req.body.body) {
+      Article.findOne({ slug: slug }, function (err, article) {
+          let authorEmail = User.getEmails(article.author)
+          if (!article)
+              res.status(404).send("Article not found");
+          else
+              article.comments.push(req.body)
+              console.log("Did we get email: " + authorEmail)
+              if (authorEmail != null){
+                sendgrid.sendCommentUpdate(authorEmail, article, aurl, whoCommented)
+              }
+              article.save().then(article => {
+                  res.json('Comments added to ' + article.title);
+              })
+              .catch(err => {
+                  res.status(400).send("Update not possible");
+              });
+      });
+    } else {
+      var err = new Error('Body field required.');
+      err.status = 400;
+      return next(err);
+    }
+
+});
+
 //delte and article by slug
 router.route('/delete/:slug').post(function(req, res) {
   let slug = encodeURIComponent(req.params.slug);
@@ -169,84 +249,6 @@ router.route('/delete/id/:id').post(function(req, res) {
       }
     }
   });
-});
-//Post an Article
-router.route('/add').post(function(req, res) {
-  let slug = encodeURIComponent(req.body.title)
-  let userList = User.getEmails()
-  // console.log("str8 function call: " + User.getEmails)
-  // console.log("trying to create " + slug)
-  Article.findOne({ slug: slug }, function (err, article) {
-
-    if (article) {
-      console.log("error, aritcle exists")
-      res.status(409).send("Article name already exists")
-    } else {
-        //console.log(err + 'Could not find article');
-
-        console.log("no article with that title found")
-        let article = new Article(req.body);
-        console.log(article)
-        article.save()
-            .then(article => {
-              let aurl = `https://aotd.herokuapp.com/article/${slug}`
-                sendgrid.sendNewArticle(article, aurl, userList)
-                res.status(200).json(
-                  {
-                    'article': 'article added successfully',
-                    'body': article
-                });
-            })
-            .catch(err => {
-                res.status(400).json(err);
-                console.log(err)
-                console.log("received request: ")
-                console.log(req.body)
-                //console.log(article)
-            });
-    }
-  })
-
-});
-//Add comments to an article
-router.route('/:slug/comments').post(function(req, res) {
-    let slug = encodeURIComponent(req.params.slug);
-    let aurl = `https://aotd.herokuapp.com/article/${slug}`
-    let id = req.params.id;
-    let whoCommented = "No User"
-    User.findById(req.session.userId, function (error, user) {
-      if (error || !user) {
-        res.status(400).send('Not logged in');
-      } else {
-        whoCommented = user.username
-      }
-    })
-    //console.log("comments atempt")
-    //console.log(slug)
-    if (req.body.body) {
-      Article.findOne({ slug: slug }, function (err, article) {
-          let authorEmail = User.getEmails(article.author)
-          if (!article)
-              res.status(404).send("Article not found");
-          else
-              article.comments.push(req.body)
-              console.log("Did we get email: " + authorEmail)
-              if (authorEmail != null){
-                sendgrid.sendCommentUpdate(authorEmail, article, aurl, whoCommented)
-              }
-              article.save().then(article => {
-                  res.json('Comments added to ' + article.title);
-              })
-              .catch(err => {
-                  res.status(400).send("Update not possible");
-              });
-      });
-    } else {
-      var err = new Error('Body field required.');
-      err.status = 400;
-      return next(err);
-    }
-
 });
 
 module.exports = router;

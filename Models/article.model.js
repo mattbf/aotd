@@ -8,8 +8,18 @@ let Article = new Schema({
         required: true,
     },
     author: {
+      email: {
         type: String,
+        unique: true,
         required: true,
+        trim: true
+      },
+      username: {
+        type: String,
+        unique: true,
+        required: true,
+        trim: true
+      },
     },
     body: {
         type: Object,
