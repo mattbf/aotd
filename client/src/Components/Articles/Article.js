@@ -65,7 +65,8 @@ function Article(props) {
   const [article, setArticle] = useState({
     data: [],
     timeago: '',
-    commentsCount: 0
+    commentsCount: 0,
+    author: ''
   })
   const [refresh, setRefresh] = useState(1)
 
@@ -105,7 +106,7 @@ function Article(props) {
     commentsEditorState.getCurrentContent()
   );
 
-
+//get the article data
   useEffect(() => {
     setFetch({
       isLoading: true,
@@ -122,7 +123,8 @@ function Article(props) {
             setArticle({
               data: response.data,
               timeago: timeDifferenceForDate(response.data.createdAt),
-              commentsCount: response.data.comments ? response.data.comments.length : 0
+              commentsCount: response.data.comments ? response.data.comments.length : 0,
+              author: response.data.author
             });
             setFetch({
               isLoading: false,
@@ -189,7 +191,6 @@ function Article(props) {
       })
   }
 
-
   return(
     <div>
       <MetaTags>
@@ -208,20 +209,20 @@ function Article(props) {
       {fetch.isError ?
         //fetch.error.statuscode == 401 ?
         fetch.error.code == 401 ?
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: !isMobile ? 'center' : 'flex-start', justifyContent: 'center', marginLeft: 'auto', marginRight: 'auto', minHeight: '400px', width: '75%'}}>
-          <Heading marginBottom={10} size={700}>Oops.. Looks like you are not logged in!</Heading>
-          <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
-            <Link to={'/login'}>
-              <Heading size={500} marginRight={5}>Login</Heading>
-            </Link>
-            <Heading size={500}>
-            to enjoy the article
-            </Heading>
-            <Heading size={500} style={{color: '#2D80D4', marginLeft: '5px'}}>
-              {articleTitle}
-            </Heading>
+          <div style={{display: 'flex', flexDirection: 'column', alignItems: !isMobile ? 'center' : 'flex-start', justifyContent: 'center', marginLeft: 'auto', marginRight: 'auto', minHeight: '400px', width: '75%'}}>
+            <Heading marginBottom={10} size={700}>Oops.. Looks like you are not logged in!</Heading>
+            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
+              <Link to={'/login'}>
+                <Heading size={500} marginRight={5}>Login</Heading>
+              </Link>
+              <Heading size={500}>
+              to enjoy the article
+              </Heading>
+              <Heading size={500} style={{color: '#2D80D4', marginLeft: '5px'}}>
+                {articleTitle}
+              </Heading>
+            </div>
           </div>
-        </div>
         :
         fetch.error.code == 404 ?
           <div style={{display: 'flex', flexDirection: 'column', alignItems: !isMobile ? 'center' : 'flex-start', justifyContent: 'center', marginLeft: 'auto', marginRight: 'auto', minHeight: '400px', width: '75%'}}>
@@ -247,8 +248,8 @@ function Article(props) {
           <Pane padding={15} background="#F7F9FD" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
             <Pane display="flex" alignItems="center" marginBottom={10}>
               <Heading size={200} marginRight={5}>Posted by </Heading>
-              <Link to={`/author/${article.data.author}`}>
-                <Heading size={200} marginRight={5}>{article.data.author} |</Heading>
+              <Link to={`/author/${article.author.username}`}>
+                <Heading size={200} marginRight={5}>{article.author.username} |</Heading>
               </Link>
               <Heading size={200} marginRight={5}>{article.timeago} |</Heading>
               <SectionLink

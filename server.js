@@ -30,8 +30,8 @@ var adminRouter = require('./Routes/AdminRoutes')
 var sendTestEmail = require('./Sendgrid/SendgridFunctions')
 
 // //sendTestEmail.sendMessage()
-// //Create admin user
-// var createAdmin = require('./seed');
+//Create admin user
+var createAdmin = require('./seed');
 
 //test egt enmails
 // var User = require('./Models/user.model');
