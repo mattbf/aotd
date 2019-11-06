@@ -110,8 +110,8 @@ function CreateArticle() {
       data:{
       	title: title,
       	author: {
-          email: user.username,
-          username: user.email,
+          email: user.email,
+          username: user.username,
         },
       	body: JSON.stringify(rawContentState),
       	slug: title ? encodeURIComponent(PrettyUrl(title)) : '',
@@ -154,7 +154,10 @@ function CreateArticle() {
       url: apiUrl,
       data:{
       	title: title,
-      	author: user.username,
+        author: {
+          email: user.email,
+          username: user.username,
+        },
       	body: JSON.stringify(rawContentState),
       	slug: title ? encodeURIComponent(PrettyUrl(title)) : '',
         isDraft: true

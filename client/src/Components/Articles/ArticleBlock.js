@@ -42,7 +42,7 @@ function ArticleBlock(props) {
               <div flex={1} alignItems="center" display="flex">
                 <Text size={300} marginRight={1}>Posted by </Text>
                 <Link to={authorLink} style={{marginTop: '-4px'}}>
-                  <Text size={300} marginRight={3}>{props.article.author}</Text>
+                  <Text size={300} marginRight={3}>{props.article.author.username}</Text>
                 </Link>
                 <Text size={300} marginRight={3}> | </Text>
                 <Text size={300}>  {timeago} | {commentsCount} comments</Text>
