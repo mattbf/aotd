@@ -109,7 +109,10 @@ function CreateArticle() {
       url: apiUrl,
       data:{
       	title: title,
-      	author: user.username,
+      	author: {
+          email: user.username,
+          username: user.email,
+        },
       	body: JSON.stringify(rawContentState),
       	slug: title ? encodeURIComponent(PrettyUrl(title)) : '',
       }

@@ -135,7 +135,7 @@ router.route('/:slug/comments').post(function(req, res) {
     //console.log(slug)
     if (req.body.body) {
       Article.findOne({ slug: slug }, function (err, article) {
-          let authorEmail = User.getEmails(article.author)
+          let authorEmail = article.author.email//User.getEmails(article.author)
           if (!article)
               res.status(404).send("Article not found");
           else
