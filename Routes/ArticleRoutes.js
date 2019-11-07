@@ -39,7 +39,7 @@ router.route('/:slug').get(function(req, res) {
         } else {
           let slug = encodeURIComponent(req.params.slug);
           Article.findOne({ slug: slug })
-          populate('author', 'email username')
+          .populate('author', 'email username')
           .exec(function (err, article) {
             //console.log(slug)
             if (err || !article) {
