@@ -105,6 +105,7 @@ router.get('/auth', function (req, res, next) {
           return next(err);
         } else {
           return res.json({
+            '_id': user._id,
             'username': user.username,
             'email': user.email,
             'role': user.role,
