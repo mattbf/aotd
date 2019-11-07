@@ -171,10 +171,10 @@ router.get('/:username', function (req, res, next) {
         } else {
           User.find({username: profile}, function(err, userProfile) {
             //console.log(userProfile)
-            Article.find({author: profile}, function(err, authorArticles) {
+            Article.find({author: req.session.userId}, function(err, authorArticles) {
                 if (err) {
                     console.log(err);
-                    var err = new Error("User has no articles");
+                    var err = new Error("error getting user articles");
                     err.status = 400;
                     return next(err);
                 } else {
