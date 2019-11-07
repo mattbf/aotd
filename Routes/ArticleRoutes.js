@@ -13,7 +13,10 @@ const roles = {
 //Get All Articles
 router.route('/').get(function(req, res) {
     const descSort = {'createdAt': +1}
-    Article.find({isDraft: false}).sort(descSort).exec(function(err, articles) {
+    Article.find({isDraft: false})
+    .populate('author')
+    .sort(descSort)
+    .exec(function(err, articles) {
         if (err) {
             console.log(err);
         } else {
