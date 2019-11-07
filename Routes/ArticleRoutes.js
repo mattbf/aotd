@@ -14,7 +14,7 @@ const roles = {
 router.route('/').get(function(req, res) {
     const descSort = {'createdAt': +1}
     Article.find({isDraft: false})
-    .populate('author')
+    .populate('author', 'email username')
     .sort(descSort)
     .exec(function(err, articles) {
         if (err) {
@@ -39,7 +39,7 @@ router.route('/:slug').get(function(req, res) {
         } else {
           let slug = encodeURIComponent(req.params.slug);
           Article.findOne({ slug: slug })
-          .populate('author')
+          populate('author', 'email username')
           .exec(function (err, article) {
             //console.log(slug)
             if (err || !article) {
@@ -70,7 +70,7 @@ router.route('/draft/:slug').get(function(req, res) {
         } else {
           let slug = encodeURIComponent(req.params.slug);
           Article.findOne({ slug: slug, draft: true })
-          .populate('author')
+          populate('author', 'email username')
           .exec(function (err, article) {
             //console.log(slug)
             if (err || !article) {
@@ -142,7 +142,7 @@ router.route('/:slug/comments').post(function(req, res) {
     //console.log(slug)
     if (req.body.body) {
       Article.findOne({ slug: slug })
-      .populate('author')
+      populate('author', 'email username')
       .exec(function (err, article) {
           let authorEmail = article.author.email//User.getEmails(article.author)
           if (!article)
