@@ -19,10 +19,10 @@ const NODE_ENV=process.env.NODE_ENV
 const SESS_NAME=process.env.SESS_NAME || "localsession"
 const SESS_SECRET=process.env.SESS_SECRET || "localsessionsecret"
 
-console.log("is Prod: " + NODE_ENV === 'production')
-console.log("Domain: " + APP_DOMAIN)
-console.log("Session Name: " + SESS_NAME + " Lifetime: " + SESS_LIFETIME)
-console.log("apikey: " + process.env.SENDGRID_API_KEY)
+// console.log("is Prod: " + NODE_ENV === 'production')
+// console.log("Domain: " + APP_DOMAIN)
+// console.log("Session Name: " + SESS_NAME + " Lifetime: " + SESS_LIFETIME)
+// console.log("apikey: " + process.env.SENDGRID_API_KEY)
 
 var articleRouter = require('./Routes/ArticleRoutes');
 var userRouter = require('./Routes/UserRoutes')
@@ -31,7 +31,7 @@ var sendTestEmail = require('./Sendgrid/SendgridFunctions')
 
 // //sendTestEmail.sendMessage()
 //Create admin user
-var createAdmin = require('./seed');
+//var createAdmin = require('./seed');
 
 //test egt enmails
 // var User = require('./Models/user.model');

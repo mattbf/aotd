@@ -20,7 +20,7 @@ module.exports = {
       templateId: 'd-a67a600310864e66aea10b0f2e119201',
       dynamic_template_data: {
         article: {
-          author: article.author,
+          author: article.author.username,
           title: article.title,
           url: url,
           cta: "Read Article"

@@ -8,18 +8,8 @@ let Article = new Schema({
         required: true,
     },
     author: {
-      email: {
-        type: String,
-        unique: true,
-        required: true,
-        trim: true
-      },
-      username: {
-        type: String,
-        unique: true,
-        required: true,
-        trim: true
-      },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     },
     body: {
         type: Object,
@@ -38,9 +28,6 @@ let Article = new Schema({
       type: String
     },
     isDraft: {
-      type: Boolean, default: false
-    },
-    isFeature: {
       type: Boolean, default: false
     },
 
