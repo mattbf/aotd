@@ -102,7 +102,7 @@ router.route('/add').post(function(req, res) {
         //console.log(err + 'Could not find article');
 
         console.log("no article with that title found")
-        let article = new Article(req.body);
+        let article = new Article(req.body)
         console.log(article)
         article.save()
             .then(article => {
@@ -151,7 +151,7 @@ router.route('/:slug/comments').post(function(req, res) {
               article.comments.push(req.body)
               console.log("Did we get email: " + authorEmail)
               if (authorEmail != null){
-                //sendgrid.sendCommentUpdate(authorEmail, article, aurl, whoCommented)
+                sendgrid.sendCommentUpdate(authorEmail, article, aurl, whoCommented)
               }
               article.save().then(article => {
                   res.json('Comments added to ' + article.title);
