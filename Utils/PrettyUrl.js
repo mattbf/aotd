@@ -3,3 +3,5 @@ function PrettyUrl(title) {
   var url = lowerNoSpace.replace('--', '')
   return url
 }
+
+module.exports = PrettyUrl

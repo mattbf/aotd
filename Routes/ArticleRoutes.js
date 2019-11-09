@@ -3,6 +3,7 @@ var router = express.Router();
 let Article = require('../Models/article.model');
 var User = require('../Models/user.model');
 var sendgrid = require('../Sendgrid/SendgridFunctions')
+var PrettyUrl = require('../Utils/PrettyUrl')
 
 const roles = {
     'user': { can: [] },
@@ -38,6 +39,8 @@ router.route('/:slug').get(function(req, res) {
           return res.status(401).send("Not authorized. UserSession: " + req.session);
         } else {
           let slug = encodeURIComponent(req.params.slug);
+          console.log("received " + req.params.slug + " As slug")
+          console.log("tryign to find article: " + slug)
           Article.findOne({ slug: slug })
           .populate('author', 'email username')
           .exec(function (err, article) {
@@ -103,11 +106,12 @@ router.route('/add').post(function(req, res) {
 
         console.log("no article with that title found")
         let article = new Article(req.body)
-        console.log(article)
+
         article.save()
             .then(article => {
               let aurl = `https://aotd.herokuapp.com/article/${slug}`
-                //sendgrid.sendNewArticle(article, aurl, userList)
+                //console.log("sending a req to sendgrid with " + PrettyUrl(article.title))
+                Article.newArticle(PrettyUrl(article.title), aurl, userList)
                 res.status(200).json(
                   {
                     'article': 'article added successfully',
