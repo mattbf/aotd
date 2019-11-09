@@ -55,7 +55,7 @@ function App() {
       .then(response => {
         globalActions.setUser(response.data)
         globalActions.LogInOut(true)
-        console.log("Signed in user is:" + response.data)
+        console.log("Signed in user is:")
         console.log(response.data)
         console.log(response.data._id)
         setFetch({

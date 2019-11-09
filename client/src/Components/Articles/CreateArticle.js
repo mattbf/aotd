@@ -63,6 +63,7 @@ function CreateArticle() {
   const windowSize = useWindowSize()
   const isMobile = windowSize.width < 500 ? true : false
 
+
   const [title, setTitle] = useState('')
   const [articleInfo, setArticleInfo] = useState({})
   const [isSuccess, setIsSuccess] = useState(false)
@@ -84,6 +85,11 @@ function CreateArticle() {
   const rawContentState = convertToRaw(
   editorState.getCurrentContent()
   );
+
+  useEffect(()=> {
+    console.log("Infomation:")
+    console.log("User: " + user._id + user.username)
+  }, [title])
 
   useEffect(() => {
     let isPostable = rawContentState.blocks[0].text == "" || title == '' || title.includes("%") ? false : true

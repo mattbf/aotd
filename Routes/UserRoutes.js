@@ -158,7 +158,9 @@ router.post('/:username/update', function(req, res) {
 //GET user profile
 router.get('/:username', function (req, res, next) {
   //console.log(req.session)
+
   let profile = req.params.username;
+  console.log("trying to view " + profile)
   User.findById(req.session.userId)
     .exec(function (error, user) {
       if (error) {
@@ -170,8 +172,9 @@ router.get('/:username', function (req, res, next) {
           return next(err);
         } else {
           User.find({username: profile}, function(err, userProfile) {
-            //console.log(userProfile)
-            Article.find({author: req.session.userId}, function(err, authorArticles) {
+            console.log(userProfile)
+
+            Article.find({author: userProfile }, function(err, authorArticles) {
                 if (err) {
                     console.log(err);
                     var err = new Error("error getting user articles");

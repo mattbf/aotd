@@ -10,7 +10,8 @@ let ArticleSchema = new Schema({
     },
     author: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true,
     },
     body: {
         type: Object,
@@ -44,8 +45,8 @@ ArticleSchema.statics.newArticle = function (title, url, userList) {
       if (err || !article) {
           console.log(err + 'Could not find article');
       } else {
-          console.log("heres your article")
-          console.log(article.title + " by: " + article.author.username)
+          // console.log("heres your article")
+          //console.log(article.title + " by: " + article.author.username)
 
           sendgrid.sendNewArticle(article, url, userList)
     }
