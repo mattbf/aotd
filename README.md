@@ -23,5 +23,5 @@ You can view the app at [www.aotd.ca](http://aotd.ca)
 * [x] User authentication using sessions
 * [x] READ and WRITE articles
 * [x] comment on articles
+* [x] email notifications via sendgrid
 * [ ] create draft articles
-* [ ] email notifications via sendgrid
