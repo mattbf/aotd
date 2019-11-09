@@ -107,7 +107,7 @@ router.route('/add').post(function(req, res) {
         article.save()
             .then(article => {
               let aurl = `https://aotd.herokuapp.com/article/${slug}`
-                sendgrid.sendNewArticle(article, aurl, userList)
+                //sendgrid.sendNewArticle(article, aurl, userList)
                 res.status(200).json(
                   {
                     'article': 'article added successfully',
@@ -142,7 +142,7 @@ router.route('/:slug/comments').post(function(req, res) {
     //console.log(slug)
     if (req.body.body) {
       Article.findOne({ slug: slug })
-      populate('author', 'email username')
+      .populate('author', 'email username')
       .exec(function (err, article) {
           let authorEmail = article.author.email//User.getEmails(article.author)
           if (!article)
@@ -151,7 +151,7 @@ router.route('/:slug/comments').post(function(req, res) {
               article.comments.push(req.body)
               console.log("Did we get email: " + authorEmail)
               if (authorEmail != null){
-                sendgrid.sendCommentUpdate(authorEmail, article, aurl, whoCommented)
+                //sendgrid.sendCommentUpdate(authorEmail, article, aurl, whoCommented)
               }
               article.save().then(article => {
                   res.json('Comments added to ' + article.title);
