@@ -18,7 +18,7 @@ module.exports = {
   sendNewArticle: function (article, url, userList) {
       console.log("send update for " + article.title + " by " + article.author.username)
       sgMail.send({
-        to: "matthewbf8@gmail.com",//userList,
+        to: userList,
         from: 'articles@aotd.ca',
         subject: 'New Article: ' + article.title,
         templateId: 'd-a67a600310864e66aea10b0f2e119201',
@@ -39,7 +39,7 @@ module.exports = {
     console.log("emails: " + authorEmail)
     console.log("who commented: " + whoCommented)
     sgMail.send({
-      to: "matthewbf8@gmail.com",//authorEmail,
+      to: authorEmail,
       from: 'articles@aotd.ca',
       subject: whoCommented + ' commented on your article ' + article.title,
       templateId: 'd-e95095aa24c74833bed79975da13099f',
