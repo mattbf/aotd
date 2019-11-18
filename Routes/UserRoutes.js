@@ -36,6 +36,7 @@ router.post('/', function (req, res, next) {
         if (error.code === 11000) {
           // email or username could violate the unique index. we need to find out which field it was.
           let message = "duplicate error"
+          console.log("Unique index error")
           let field = error.message.split(" ")[7];
           field = field.split('_')[0]
           if (field == 'email') {
@@ -43,7 +44,7 @@ router.post('/', function (req, res, next) {
           } else {
             message = "username is taken"
           }
-
+          console.log("Username taken")
           return res.status(400).send({
             'message': message,
             'value': field
@@ -65,6 +66,7 @@ router.post('/', function (req, res, next) {
   } else if (req.body.logemail && req.body.logpassword) {
     User.authenticate(req.body.logemail, req.body.logpassword, function (error, user) {
       if (error || !user) {
+        console.log("Wrong email or password")
         var err = new Error('Wrong email or password.');
         err.status = 401;
         return next(err);
@@ -83,6 +85,7 @@ router.post('/', function (req, res, next) {
       }
     });
   } else {
+    console.log("all fields required")
     var err = new Error('All fields required.');
     err.status = 400;
     return next(err);

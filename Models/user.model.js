@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
+
 var UserSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -154,3 +155,15 @@ UserSchema.statics.getEmails = function (author) {
 
 var User = mongoose.model('User', UserSchema);
 module.exports = User;
+
+
+//Password reset
+// var bcrypt = require('bcrypt');
+//
+// bcrypt.hash('password123', 10, function (err, hash) {
+//   if (err) {
+//     return next(err);
+//   }
+//   console.log("passwrod hash:")
+//   console.log(hash)
+// })

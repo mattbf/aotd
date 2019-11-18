@@ -17,21 +17,21 @@ const msg = {
 module.exports = {
   sendNewArticle: function (article, url, userList) {
       // console.log("send update for " + article.title + " by " + article.author.username)
-      console.log(article)
-      // sgMail.send({
-      //   to: userList,
-      //   from: 'articles@aotd.ca',
-      //   subject: 'New Article: ' + article.title,
-      //   templateId: 'd-a67a600310864e66aea10b0f2e119201',
-      //   dynamic_template_data: {
-      //     article: {
-      //       author: article.author.username,
-      //       title: article.title,
-      //       url: url,
-      //       cta: "Read Article"
-      //     }
-      //   },
-      // });
+      //console.log(article)
+      sgMail.send({
+        to: userList,
+        from: 'articles@aotd.ca',
+        subject: 'New Article: ' + article.title,
+        templateId: 'd-a67a600310864e66aea10b0f2e119201',
+        dynamic_template_data: {
+          article: {
+            author: article.author.username,
+            title: article.title,
+            url: url,
+            cta: "Read Article"
+          }
+        },
+      });
   },
   sendCommentUpdate: function (authorEmail, article, url, whoCommented) {
     // console.log("attempting to send msg ")
